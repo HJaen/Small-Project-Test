@@ -29,6 +29,11 @@ color: #fff;
 text-align: center;
 }
 
+.login-box h3 {
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
 
 .login-box .user-box {
 position: relative;
