@@ -5,44 +5,76 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-function doRegister()
+function CheckFields()
 {
-	userId = 0;
 	let firstName = document.getElementById("FirstName").value;
 	let lastName = document.getElementById("LastName").value;
-	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
-	
-	document.getElementById("loginResult").innerHTML = "";
+	let reEnterPass = document.getElementById("loginPasswordreenter").value;
 
-	let tmp = {firstName:firstName,LastName:lastName,Login:login,Password:password};
-//	var tmp = {login:login,password:hash};
-	let jsonPayload = JSON.stringify( tmp );
-	
-	let url = urlBase + '/CreateUser.' + extension;
+	if(firstName == ""){
+		return [false, "Please enter First Name"];
+	}
+	else if(lastName == ""){
+		return [false, "Please enter Last Name"];
+	}
+	else if(login == ""){
+		return [false, "Please enter Username"];
+	}
+	else if(password == ""){
+		return [false, "Please enter Password"];
+	}
+	else if(password != reEnterPass){
+		return [false, "Passwords do not match."];
+	}
+	else
+	return [true,""];
+}
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
+function doRegister()
+{
+	if(!CheckFields()[0])
 	{
-		xhr.onreadystatechange = function() 
+		document.getElementById("loginResult").innerHTML = CheckFields()[1];
+	}
+	else{
+		userId = 0;
+		let firstName = document.getElementById("FirstName").value;
+		let lastName = document.getElementById("LastName").value;
+		
+		let login = document.getElementById("loginName").value;
+		let password = document.getElementById("loginPassword").value;
+		var hash = md5( password );
+		
+		document.getElementById("loginResult").innerHTML = "";
+
+		let tmp = {firstName:firstName,LastName:lastName,Login:login,Password:hash};
+	//	var tmp = {login:login,password:hash};
+		let jsonPayload = JSON.stringify( tmp );
+		
+		let url = urlBase + '/CreateUser.' + extension;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		try
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			xhr.onreadystatechange = function() 
 			{
-				let jsonObject = JSON.parse( xhr.responseText );
-				window.location.href = "index.html";
-			}
-		};
-		xhr.send(jsonPayload);
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					let jsonObject = JSON.parse( xhr.responseText );
+					window.location.href = "index.html";
+				}
+			};
+			xhr.send(jsonPayload);
+		}
+		catch(err)
+		{
+			document.getElementById("loginResult").innerHTML = err.message;
+		}
 	}
-	catch(err)
-	{
-		document.getElementById("loginResult").innerHTML = err.message;
-	}
-
 }
 
 function doLogin()
@@ -53,11 +85,11 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
+	var hash = md5( password );
 	
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
+	let tmp = {login:login,password:hash};
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
