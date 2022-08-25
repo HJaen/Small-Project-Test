@@ -85,3 +85,7 @@ font-size: 12px;
 #loginButton:focus {
   background: #275d29;
 }
+
+#loginResult {
+  color: #ff0000;
+}
