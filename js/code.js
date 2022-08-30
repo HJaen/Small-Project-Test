@@ -255,3 +255,42 @@ function searchColor()
 	}
 	
 }
+
+function addContact()
+{
+	// Eventually replace # with respective IDs
+	let id = document.getElementById("###").value;
+	let firstName = document.getElementById("###").value;
+	let lastName = document.getElementById("###").value;
+	let email = document.getElementById("###").value;
+	let phone = document.getElementById("###").value;
+	let userID = document.getElementById("###").value;
+	let dateCreated = document.getElementById("###").value;
+
+	document.getElementById("contactAddResult").innerHTML = "";
+
+	let tmp = {id:id,firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userID,dateCreated:dateCreated};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/AddContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "applciation/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("contactAddResult").innerHTML = "Contact added!";
+				let jsonObject = JSON.parse(xhr.responseText);
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactAddResult").innerHTML = err.message;
+	}
+}

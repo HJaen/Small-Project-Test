@@ -89,3 +89,47 @@ font-size: 12px;
 #loginResult {
   color: #ff0000;
 }
+
+table.contactTable {
+  font-family: sans-serif;
+  border: 1px solid #FFFFFF;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.contactTable td, table.contactTable th {
+  border: 1px solid #FFFFFF;
+  padding: 5px 10px;
+}
+table.contactTable tbody td {
+  font-size: 16px;
+  color: #FFFFFF;
+}
+table.contactTable thead {
+  background: #4CAF50;
+  background: -moz-linear-gradient(top, #79c37c 0%, #5eb761 66%, #4CAF50 100%);
+  background: -webkit-linear-gradient(top, #79c37c 0%, #5eb761 66%, #4CAF50 100%);
+  background: linear-gradient(to bottom, #79c37c 0%, #5eb761 66%, #4CAF50 100%);
+  border-bottom: 1px solid #FFFFFF;
+}
+table.contactTable thead th {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 1px solid #FFFFFF;
+}
+table.contactTable thead th:first-child {
+  border-left: none;
+}
+
+table.contactTable tfoot .links {
+  text-align: right;
+}
+table.contactTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
