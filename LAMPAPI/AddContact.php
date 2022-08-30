@@ -6,13 +6,13 @@
 
     // Contact info
     // Eventually these change keys to match the keys in JavaScript
-    $id = $inData["ID"];
-    $firstName = $inData["FirstName"];
-    $lastName = $inData["LastName"];
-    $email = $inDate["Email"];
-    $phone = $inDate["Phone"];
-    $userId = $inData["UserID"]
-    $dateCreated = $inDate["DateCreated"];
+    $id = $inData["id"];
+    $firstName = $inData["firstName"];
+    $lastName = $inData["lastName"];
+    $email = $inDate["email"];
+    $phone = $inDate["phone"];
+    $userId = $inData["userID"]
+    $dateCreated = $inDate["dateCreated"];
 
     // Eventually replace this with actual info
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
