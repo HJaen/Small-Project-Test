@@ -7,10 +7,9 @@
     // Contact info
     $firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
-    $email = $inDate["email"];
-    $phone = $inDate["phone"];
-    $userId = $inData["userID"]
-    $dateCreated = $inDate["dateCreated"];
+    $email = $inData["email"];
+    $phone = $inData["phone"];
+    $userId = $inData["userID"];
 
     // Eventually replace this with actual info
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
@@ -21,9 +20,9 @@
     }
     else
     {
-        $stmt = $conn->prepare("INSERT into Contacts(ID, FirstName, LastName, Email, Phone, UserID, DateCreated) VALUES(?,?,?,?,?,?,?)");
+        $stmt = $conn->prepare("INSERT into Contacts(FirstName, LastName, Email, Phone, UserID) VALUES(?,?,?,?,?)");
         // $stmt->bind_param("dssssds", $inData["ID"], $inData["FirstName"], $inData["LastName"], $inData["Email"], $inData["Phone"], $inData["UserId"], $inDate["DateCreated"]);
-        $stmt->bind_param("ssssds", $inData["FirstName"], $inData["LastName"], $inData["Email"], $inData["Phone"], $inData["UserId"], $inDate["DateCreated"]);
+        $stmt->bind_param("sssss", $firstName, $lastName, $email, $phone, $userId);
         $stmt->execute();
         $stmt->close();
         $conn->close();
