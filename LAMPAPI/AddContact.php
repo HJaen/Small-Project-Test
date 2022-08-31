@@ -5,8 +5,6 @@
     $inData = getRequestInfo();
 
     // Contact info
-    // Eventually these change keys to match the keys in JavaScript
-    $id = $inData["id"];
     $firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
     $email = $inDate["email"];
@@ -16,6 +14,7 @@
 
     // Eventually replace this with actual info
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+    // $conn = new mysqli("localhost", "root", "0afdbc3e76a812133be14d1c737c6766a3988364f36eb65d", "Contacts");     // Ask Fez
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error );
@@ -23,7 +22,8 @@
     else
     {
         $stmt = $conn->prepare("INSERT into Contacts(ID, FirstName, LastName, Email, Phone, UserID, DateCreated) VALUES(?,?,?,?,?,?,?)");
-        $stmt->bind_param("dssssds", $inData["ID"], $inData["FirstName"], $inData["LastName"], $inData["Email"], $inData["Phone"], $inData["UserId"], $inDate["DateCreated"]);
+        // $stmt->bind_param("dssssds", $inData["ID"], $inData["FirstName"], $inData["LastName"], $inData["Email"], $inData["Phone"], $inData["UserId"], $inDate["DateCreated"]);
+        $stmt->bind_param("ssssds", $inData["FirstName"], $inData["LastName"], $inData["Email"], $inData["Phone"], $inData["UserId"], $inDate["DateCreated"]);
         $stmt->execute();
         $stmt->close();
         $conn->close();
@@ -49,8 +49,7 @@
 
     function returnWithInfo( $id, $firstName, $lastName, $email, $phone, $userId, $dateCreated)
     {
-        $retValue = '{"id": ' . $id . ',' .
-                    '"firstName": ' . $firstName . ',' .
+        $retValue = '{"firstName": ' . $firstName . ',' .
                     '"lastName": ' . $lastName . ',' .
                     '"email": ' . $email . ',' .
                     '"phone": ' . $phone . ',' .
