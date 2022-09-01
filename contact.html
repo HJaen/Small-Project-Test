@@ -21,7 +21,14 @@
 
           <div class="nav-search col-three">
             <div>
-              <input type="text" id="searchText" placeholder="Contact To Search For"/>
+              <input type="text" id="searchText" placeholder="Contact To Search For" onkeypress="return enterKeyPressed(event)" />
+              <script>
+                 function enterKeyPressed(event) {
+                    if (event.keyCode == 13) {
+                       searchContact();
+                    }
+                 }
+              </script>
               <button type="button" id="searchButton" class="buttons searchButton" title="Click to search contacts!" onclick="searchContact();"></button><br />
             </div>
           </div>
