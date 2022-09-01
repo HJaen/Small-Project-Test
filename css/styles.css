@@ -103,7 +103,7 @@ body {
   margin-right: 7px;
 }
 .editButton {
-  background-image: url("/icons/editIcon.png");
+  background-image: url("/images/editIcon.png");
 }
 .editButton:hover {
   background-color: rgba(255, 255, 255, 0.25);
@@ -112,7 +112,7 @@ body {
   background-color: rgba(255, 255, 255, 0.6)
 }
 .deleteButton {
-  background-image: url("/icons/deleteIcon.png");
+  background-image: url("/images/deleteIcon.png");
 }
 .deleteButton:hover {
   background-color: rgba(255, 0, 0, 0.2);
@@ -124,7 +124,7 @@ body {
   vertical-align: middle;
   background-color: rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
-  background-image: url("/icons/searchIcon.png");
+  background-image: url("/images/searchIcon.png");
   width: 32px;
   height: 32px;
   transform: translate(0%, -50%);
