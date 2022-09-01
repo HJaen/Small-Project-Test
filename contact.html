@@ -1,54 +1,97 @@
 <html>
-<head>
+
+  <head>
     <title>Contact Manager</title>
     <script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">   
+    <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    
+
     <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() 
-    {
+      document.addEventListener('DOMContentLoaded', function() {
         readCookie();
-    }, false);
+      }, false);
+
     </script>
-    
-</head>
-<body>
 
-<h1 id="title">Contact Manager</h1>
+  </head>
 
-<div id="loggedInDiv">
-    <span id="userName"></span><br />
-    <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
+  <body>
+        <nav>
+          <h1 id="title" class="title col-three">Contact Manager</h1><br />
 
-<div id="accessUIDiv">
-    <br />
+          <div class="nav-search col-three">
+            <div>
+              <input type="text" id="searchText" placeholder="Contact To Search For" onkeypress="return enterKeyPressed(event)" />
+              <script>
+                 function enterKeyPressed(event) {
+                    if (event.keyCode == 13) {
+                       searchContact();
+                    }
+                 }
+              </script>
+              <button type="button" id="searchButton" class="buttons searchButton" title="Click to search contacts!" onclick="searchContact();"></button><br />
+            </div>
+          </div>
 
-    <input type="text" id="searchText" placeholder="Contact To Search For"/>
-    <button type="button" id="searchContactButton" class="buttons" onclick="searchContact();"> Search Contact </button><br />
-    <span id="contactSearchResult"></span>
-    <p id="colorList">
-    </p><br>
-    <div class="add-contact-box"> 
-        <button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
-        <span id="contactAddResult"></span>
-    </div>
+            <div class="nav-actions col-three">
+              <li id="userName"></li>
+              <a href="addcontact.html">Add Contact</a>
+              <a onClick="doLogout();" href="#">Log Off</a>
+            </div>
 
-</div>
+        </nav>
+      
+      <div id="contactTableDiv">
+        <br /><br />
+        <table>
+          <table class="contactTable">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Date Created</th>
+                <th class="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Smith</td>
+                    <td>js@gmail.com</td>
+                    <td>111-222-3333</td>
+                    <td>8/29/2022</td>
+                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!"><button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!"></td>
+                    </tr>
+                    <tr>
+                    <td>Man</td>
+                    <td>Person</td>
+                    <td>realemail@website.com</td>
+                    <td>111-111-1111</td>
+                    <td>1/1/1111</td>
+                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!"><button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!"></button></td>
+                    </tr>
+                    <tr>
+                    <td>R.</td>
+                    <td>Leinicker</td>
+                    <td>rleinicker@knights.ucf.edu</td>
+                    <td>101-202-3030</td>
+                    <td>8/29/2022</td>
+                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!"><button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!"></button></td>
+                    </tr>
+                    <tr>
+                    <td>Final Name</td>
+                    <td>Final other name</td>
+                    <td>lastone@gmail.com</td>
+                    <td>999-999-9999</td>
+                    <td>1/1/1</td>
+                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!"><button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!"></button></td>
+                    </tr>
+            </tbody>
+          </table>
+      </div>
 
-<div id="contactTableDiv"> 
-    <br /><br />
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>&nbsp;Date Created</th>
-        </tr>
-    </table>
-</div>
+  </body>
 
-</body>
 </html>
