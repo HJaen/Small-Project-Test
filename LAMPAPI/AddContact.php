@@ -21,7 +21,6 @@
     else
     {
         $stmt = $conn->prepare("INSERT into Contacts(FirstName, LastName, Email, Phone, UserID) VALUES(?,?,?,?,?)");
-        // $stmt->bind_param("dssssds", $inData["ID"], $inData["FirstName"], $inData["LastName"], $inData["Email"], $inData["Phone"], $inData["UserId"], $inDate["DateCreated"]);
         $stmt->bind_param("sssss", $firstName, $lastName, $email, $phone, $userId);
         $stmt->execute();
         $stmt->close();
@@ -46,7 +45,7 @@
         sendResultInfoAsJson( $retValue );
     }
 
-    function returnWithInfo( $id, $firstName, $lastName, $email, $phone, $userId, $dateCreated)
+    function returnWithInfo($firstName, $lastName, $email, $phone, $userId, $dateCreated)
     {
         $retValue = '{"firstName": ' . $firstName . ',' .
                     '"lastName": ' . $lastName . ',' .
@@ -56,5 +55,22 @@
                     '"dateCreated": ' . $dateCreated . ',' .
                     '"error": ""}';
         sendResultInfoAsJson( $retValue );
+    }
+
+    // Show Contacts on HTML as a queue (top is start)
+    function displayContacts($contactsArr)
+    {
+        foreach ($contactsArr as $row)
+        {
+            $htmlRow = "<tr>";
+            $htmlRow .= "\t<td>".$row['firstName']."</td>\n";
+            $htmlRow .= "\t<td>".$row['lastName']."</td>\n";
+            $htmlRow .= "\t<td>".$row['email']."</td>\n";
+            $htmlRow .= "\t<td>".$row->['phone']."</td>\n";
+            $htmlRow .= "\t<td>".$row->['dateCreated']."</td>\n";
+            $htmlRow .= "\t<td id=".$row->['id'].">".$row->['id']."</td>\n";
+            $htmlRow .= "</tr>";
+            echo $htmlRow;
+        }
     }
 ?>
