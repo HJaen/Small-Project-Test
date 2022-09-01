@@ -256,17 +256,14 @@ function searchColor()
 	
 }
 
+// Add contact to datebase 
 function confirmAddButton()
 {
 	let firstName = document.getElementById("addFirstName").value;
 	let lastName = document.getElementById("addLastName").value;
 	let email = document.getElementById("addEmail").value;
 	let phone = document.getElementById("addPhoneNumber").value;
-	let utcDateCreated = new Date().getTime();
-	let timezone = utcDateCreated.getTimezoneOffset();
-	let dateCreated = new Date(utcDateCreated - (timezone * 60 * 1000)).toISOString().split('T')[0];
 
-	readCookie();
 	document.getElementById("contactAddResult").innerHTML = "";
 
 	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId,dateCreated:dateCreated};
@@ -283,7 +280,6 @@ function confirmAddButton()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				// let jsonObject = JSON.parse(xhr.responseText);
 				document.getElementById("contactAddResult").innerHTML = "Contact added!";
 			}
 		};
