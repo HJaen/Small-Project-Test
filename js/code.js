@@ -1,9 +1,18 @@
 const urlBase = '/LAMPAPI';
 const extension = 'php';
 
+const deleteBtns = document.querySelectorAll(".deleteButton");
+const table = document.querySelector("#contactTableDiv");
 let userId = 0;
 let firstName = "";
 let lastName = "";
+
+for (let x = 0; x < deleteBtns.length; x++)
+{
+	deleteBtns[x].addEventListener("click", () => {
+		deleteContact(x);
+	});
+}
 
 function CheckFields()
 {
@@ -288,5 +297,32 @@ function confirmAddButton()
 	catch(err)
 	{
 		document.getElementById("contactAddResult").innerHTML = err.message;
+	}
+}
+
+function deleteContact(rowNum)
+{
+	// This is wrong, ask Fez how to get the right ID	
+	// let tmp = {ID:rowNum};
+	let jsonPayload = JSON.stringify( tmp );
+	let url = urlBase + '/DeleteContact.' + extension;
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				table.deleteRow(rowNum);
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		// Add error somewhere?
 	}
 }

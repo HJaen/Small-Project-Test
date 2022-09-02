@@ -1,6 +1,12 @@
 <?php
     // WIP
-    require 'AddContact.php';
+    require_once 'AddContact.php';
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    $inData = getRequestInfo();
+
+    $deleteID = $inData["ID"];
 
     // Eventually replace this with actual info
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
@@ -12,18 +18,23 @@
     }
     else
     {
-        $deleteID = ###     // Ask Fez how to get ID to delete
+        deleteFromDatabase(); 
+
+        $conn->close();
+    }
+
+    function deleteFromDatabase()
+    {
         $query = "DELETE FROM Contacts WHERE id=$deleteID";
 
         if ( $conn->query($query) ) === TRUE)
         {
             returnWithError("Done. No error.");
+            
         }
         else
         {
             returnWithError( $conn->error );
         }
-
-        $conn->close();
     }
 ?>
