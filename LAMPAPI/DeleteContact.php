@@ -1,6 +1,4 @@
 <?php
-    // WIP
-    require_once 'AddContact.php';
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -18,23 +16,53 @@
     }
     else
     {
-        deleteFromDatabase(); 
-
-        $conn->close();
-    }
-
-    function deleteFromDatabase()
-    {
         $query = "DELETE FROM Contacts WHERE id=$deleteID";
-
-        if ( $conn->query($query) ) === TRUE)
+        $stmt = $conn->query($query);
+        $affectedRows = mysqli_affected_rows($conn);
+        if($affectedRows > 0)
         {
-            returnWithError("Done. No error.");
-            
+            $conn->close();
+            returnWithSuccess("Done. No error.");
         }
         else
         {
-            returnWithError( $conn->error );
+            $err = "Record Not Found.";
+            $conn->close();
+            returnWithError($err);
         }
+        
     }
+
+    function write_to_console($data) {
+        $console = $data;
+        if (is_array($console))
+        $console = implode(',', $console);
+       
+        echo "<script>console.log('Console: " . $console . "' );</script>";
+       }
+       
+    function returnWithError( $err )
+    {
+        $retValue = '{"error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
+
+    function returnWithSuccess( $msg )
+    {
+        $retValue = '{"Sucesss":"' . $msg . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
+
+    function getRequestInfo()
+    {
+        return json_decode(file_get_contents('php://input'), true);
+    }
+
+    function sendResultInfoAsJson( $obj )
+    {
+        header('Content-type: application/json');
+        echo $obj;
+    }
+
+
 ?>
