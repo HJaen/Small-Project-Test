@@ -1,9 +1,10 @@
 <?php
-
+	ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     $inData = getRequestInfo();
 	$search = $inData["search"] . "%";
 	$ID = $inData["ID"];
-	$searchResults = array();
 	$foundResults = 0;
 
     //change later with the server's credentials
@@ -17,30 +18,29 @@
     else
     {
 		$desired = $inData["search"] . "%";
-		$query = "SELECT * FROM Contacts WHERE FirstName like '$desired' or LastName like '$desired' and UserID=$ID";
+		$query = "SELECT * FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired')";
 		//$stmt->bind_param("sssss", $desired, $desired, $desired, $desired, $inData["userID"]);	Should the userID be returned as well? Or just the F and L name, phone and email?
 		//$stmt->bind_param("ssss", $desired, $desired, $desired, $desired);
 		//$stmt->execute();
 
 		$stmt = $conn->query($query);
-		/*Testing query... 
-		if ($stmt->num_rows > 0) {
-			// output data of each row
-			while($row = $stmt->fetch_assoc()) {
-			  echo "id: " . $row["ID"]. " - Name: " . $row["FirstName"]. " " . $row["LastName"]. "<br>";
-			}
-		} 
-		else {
-			echo "0 results";
-		}*/
 
 		if ($stmt->num_rows > 0) {
+			$searchResults ["Success"] = "200 ok";
+			$searchResults ["Length"] = $stmt->num_rows;
+			$searchResults ["Contacts"] = [];
 			while($contact = $stmt->fetch_assoc())
 			{
 				//add new array with elements(FN, LN, E, P)
-				$searchResults[] = array("FirstName" = $contact["FirstName"], "LastName" = $contact["LastName"], "Email" = $contacts["Email"], "Phone" = $contacts["Phone"]);
-				returnWithInfo($searchResults);
+				$arr = [$contact["ID"]=>[
+					"FirstName"=>$contact["FirstName"],
+					"LastName"=>$contact["LastName"],
+					"Email"=>$contact["Email"],
+					"PhoneNumber"=>$contact["Phone"]]];
+				array_push($searchResults ["Contacts"], $arr);
+				
 			}
+			return sendResultInfoAsJson(json_encode($searchResults));
 		}
 		else
 		{
@@ -63,7 +63,7 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"firstName":"","lastName":"","phoneNumber":"","email":"","error":"' . $err . '"}';
+		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
