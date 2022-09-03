@@ -2,15 +2,17 @@ const urlBase = '/LAMPAPI';
 const extension = 'php';
 
 const deleteBtns = document.querySelectorAll(".deleteButton");
-const table = document.querySelector("#contactTableDiv");
+const table = document.querySelector(".contactTable");
 let userId = 0;
 let firstName = "";
 let lastName = "";
 
+// Add event listeners to each delete button
+// Calls delete on current row
 for (let x = 0; x < deleteBtns.length; x++)
 {
 	deleteBtns[x].addEventListener("click", () => {
-		deleteContact(x);
+		deleteContact(deleteBtns[x]);		// 1 offset to account for headers
 	});
 }
 
@@ -300,10 +302,10 @@ function confirmAddButton()
 	}
 }
 
-function deleteContact(rowNum)
+function deleteContact(tableRow)
 {
-	// This is wrong, ask Fez how to get the right ID	
-	// let tmp = {ID:rowNum};
+	let contactID = tableRow.id;
+	let tmp = {ID:contactID};
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/DeleteContact.' + extension;
 	let xhr = new XMLHttpRequest();
@@ -316,13 +318,70 @@ function deleteContact(rowNum)
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				table.deleteRow(rowNum);
+				table.deleteRow(tableRow.rowIndex);
 			}
 		};
 		xhr.send(jsonPayload);
+
+		// Re-display contacts to reflect change
+		displayContacts();
 	}
 	catch(err)
 	{
 		// Add error somewhere?
+		console.log(err);
+	}
+}
+
+function displayContacts() 
+{
+	let url = urlBase + '/SeacrhContacts.' + extension;
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	xhr.send();
+
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				// Reset table
+				table.innerHTML = "";
+				table.innerHTML += "<thead>\n" +
+										"\t<tr>\n" +
+											"\t\t<th>First Name</th>" +
+											"\t\t<th>Last Name</th>" +
+											"\t\t<th>Email</th>" +
+											"\t\t<th>Phone Number</th>" +
+											"\t\t<th>Date Created</th>" +
+											"\t\t<th class='col-actions'>Actions</th>" +
+										"\t</tr>" +
+									"</thead>";
+				let jsonObject = JSON.parse( xhr.responseText );
+
+				// Add new info to the table
+				Object.keys(jsonObject).forEach(key => {
+					let tableRow = document.createElement("tr");
+					let contactID = jsonObject.Contacts.ID;
+					let firstName = jsonObject.Contacs.ID.FirstName;
+					let lastName = jsonObject.Contacs.ID.LastName;
+					let email = jsonObject.Contacs.ID.Email;
+					let phone = jsonObject.Contacs.ID.PhoneNumber;
+					tableRow.id = contactID;
+					tableRow.innerHTML += "<td>" + firstName + "</td>\n";
+					tableRow.innerHTML += "<td>" + lastName + "</td>\n";
+					tableRow.innerHTML += "<td>" + email + "</td>\n";
+					tableRow.innerHTML += "<td>" + phone + "</td>\n";
+					tableRow.innerHTML += "<td>" + dateCreated + "</td>\n";
+					table.append(tableRow);
+				});
+			}
+		}
+	}
+	catch (err)
+	{
+		// Show error
+		console.log(err);
 	}
 }
