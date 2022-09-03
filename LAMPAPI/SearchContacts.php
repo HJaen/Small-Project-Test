@@ -38,7 +38,8 @@
 		}
 		else
 		{
-			returnWithInfo($foundResults);
+			//put wrong variable by accident
+			returnWithInfo($searchResults);
 		}
     }
 
