@@ -1,0 +1,29 @@
+{
+    "Success": "200 OK",
+    "Contacts":{
+        "ID":{
+            "FirstName":"",
+            "LastName":"",
+            "Email": "",
+            "PhoneNumber":""
+        },
+        "ID":{
+            "FirstName":"",
+            "LastName":"",
+            "Email": "",
+            "PhoneNumber":""
+        },
+        "ID":{
+            "FirstName":"",
+            "LastName":"",
+            "Email": "",
+            "PhoneNumber":""
+        },
+        "ID":{
+            "FirstName":"",
+            "LastName":"",
+            "Email": "",
+            "PhoneNumber":""
+        }
+    }
+}
