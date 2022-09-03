@@ -1,20 +1,20 @@
 <?php
 
-    $inData = getRequestInfo();
+    	$inData = getRequestInfo();
 	
 	$searchResults = array();
 	$foundResults = 0;
 
-    //change later with the server's credentials
+    	//change later with the server's credentials
 	//mysqli(server host name, username to log into database, database password, said database)
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	//$conn = new mysqli("localhost", "root", "0afdbc3e76a812133be14d1c737c6766a3988364f36eb65d", "Contacts");
-    if ($conn->connect_error) 
+    	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	}
-    else
-    {
+    	else
+    	{
 		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (FirstName like ? or LastName like ? or Email like ? or Phone like ?) and UserID=?");
 		$desired = "%" . $inData["search"] . "%";
 		//$stmt->bind_param("sssss", $desired, $desired, $desired, $desired, $inData["userID"]);	Should the userID be returned as well? Or just the F and L name, phone and email?
@@ -41,11 +41,11 @@
 			//put wrong variable by accident
 			returnWithInfo($searchResults);
 		}
-    }
+	}
 
 
 
-    function getRequestInfo()
+    	function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
