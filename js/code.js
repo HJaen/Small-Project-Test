@@ -12,7 +12,7 @@ let lastName = "";
 for (let x = 0; x < deleteBtns.length; x++)
 {
 	deleteBtns[x].addEventListener("click", () => {
-		deleteContact(deleteBtns[x]);		// 1 offset to account for headers
+		deleteContact(deleteBtns[x]);	
 	});
 }
 
