@@ -36,7 +36,8 @@
 					"FirstName"=>$contact["FirstName"],
 					"LastName"=>$contact["LastName"],
 					"Email"=>$contact["Email"],
-					"PhoneNumber"=>$contact["Phone"]]];
+					"PhoneNumber"=>$contact["Phone"],
+					"DateCreated"=>$contact["DateCreated"]]];
 				array_push($searchResults ["Contacts"], $arr);
 				
 			}
