@@ -388,7 +388,6 @@ function searchContact()
 						let phone = jsonObject.Contacts[key][innerKey].PhoneNumber;
 						let dateCreated = jsonObject.Contacts[key][innerKey].DateCreated;
 						let tableRef = document.getElementsByClassName("contactTable")[0].getElementsByTagName("tbody")[0];
-						console.log(tableRef);
 						let newRow = tableRef.insertRow(-1);
 						newRow.id = contactID;
 						var newCell = newRow.insertCell();
