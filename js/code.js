@@ -324,7 +324,7 @@ function deleteContact(tableRowBtn)
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				table.deleteRow(tableRow.rowIndex);
+				table.deleteRow(row);
 			}
 		};
 		xhr.send(jsonPayload);
@@ -332,12 +332,12 @@ function deleteContact(tableRowBtn)
 	}
 	catch(err)
 	{
-		// Add error somewhere?
+		// Add error somewhere on page too?
 		console.log(err);
 	}
 }
 
-function searchContacts()
+function searchContact()
 {
 	let search = document.getElementById("searchText").value;
 	table.innerHTML = "";
