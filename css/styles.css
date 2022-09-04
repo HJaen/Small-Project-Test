@@ -7,6 +7,8 @@ body {
   padding: 0;
   font-family: sans-serif;
   background: linear-gradient(#9d87ec, #2a6dba);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .login-box {
