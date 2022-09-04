@@ -42,14 +42,36 @@
             </div>
 
         </nav>
-      
+
+        <div id="invalidSearch" class="modal">
+          <div class="modal-content">
+            <span class="closeModal">&times;</span>
+            <p>No results found.</p>
+          </div>
+        </div>
+        <script>
+          var modal = document.getElementById("invalidSearch");
+          var btn = document.getElementById("searchButton");
+          var span = document.getElementsByClassName("closeModal")[0];
+          btn.onclick = function() { 
+            modal.style.display = "block"; // <-------   Add the "if search fails" check here.
+          }
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+        </script>
+    
       <div id="contactTableDiv">
         <br /><br />
         <table>
 
           <script>
-              function popup(pageURL, pageTitle,
-                          popupWinWidth, popupWinHeight) {
+              function popup(pageURL, pageTitle, popupWinWidth, popupWinHeight) {
                   var left = (screen.width - popupWinWidth) / 2; ;
                   var top = (screen.height - popupWinHeight) / 4;
                   var myWindow = window.open(pageURL, pageTitle,
