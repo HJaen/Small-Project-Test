@@ -340,6 +340,18 @@ function deleteContact(tableRowBtn)
 function searchContact()
 {
 	let search = document.getElementById("searchText").value;
+	table.innerHTML = "";
+	table.innerHTML += "<thead>\n" +
+							"\t<tr>\n" +
+								"\t\t<th>First Name</th>\n" +
+								"\t\t<th>Last Name</th>\n" +
+								"\t\t<th>Email</th>\n" +
+								"\t\t<th>Phone Number</th>\n" +
+								"\t\t<th>Date Created</th>\n" +
+								"\t\t<th class='col-actions'>Actions</th>\n" +
+							"\t</tr>" +
+						"</thead>" + 
+						"<tbody></tbody>";
 	let actions = ""
 	let contactsList = "";
 
