@@ -340,24 +340,13 @@ function deleteContact(tableRowBtn)
 function searchContact()
 {
 	let search = document.getElementById("searchText").value;
-	table.innerHTML = "";
-	table.innerHTML += "<thead>\n" +
-							"\t<tr>\n" +
-								"\t\t<th>First Name</th>\n" +
-								"\t\t<th>Last Name</th>\n" +
-								"\t\t<th>Email</th>\n" +
-								"\t\t<th>Phone Number</th>\n" +
-								"\t\t<th>Date Created</th>\n" +
-								"\t\t<th class='col-actions'>Actions</th>\n" +
-							"\t</tr>" +
-						"</thead>";
-
+	let actions = ""
 	let contactsList = "";
 
 	let tmp = {search:search, ID:userId};
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/SearchColors.' + extension;
+	let url = urlBase + '/SearchContacts.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -369,22 +358,40 @@ function searchContact()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-
+				//console.log(jsonObject.Contacts);
 				// Add new info to the table
-				Object.keys(jsonObject).forEach(key => {
-					let tableRow = document.createElement("tr");
-					let contactID = jsonObject.Contacts.key;
-					let firstName = jsonObject.Contacs.key.FirstName;
-					let lastName = jsonObject.Contacs.key.LastName;
-					let email = jsonObject.Contacs.key.Email;
-					let phone = jsonObject.Contacs.key.PhoneNumber;
-					tableRow.id = contactID;
-					tableRow.innerHTML += "<td>" + firstName + "</td>\n";
-					tableRow.innerHTML += "<td>" + lastName + "</td>\n";
-					tableRow.innerHTML += "<td>" + email + "</td>\n";
-					tableRow.innerHTML += "<td>" + phone + "</td>\n";
-					tableRow.innerHTML += "<td>" + dateCreated + "</td>\n";
-					table.innerHTML += tableRow;
+				if(jsonObject.error)
+				{
+					console.log(jsonObject.error);
+					return;
+				}
+				Object.keys(jsonObject.Contacts).forEach(key => {
+					Object.keys(jsonObject.Contacts[key]).forEach(innerKey => {
+						//console.log(innerKey);
+						let tableRow = document.createElement("tr");
+						let contactID = innerKey;
+						let firstName = jsonObject.Contacts[key][innerKey].FirstName;
+						let lastName = jsonObject.Contacts[key][innerKey].LastName;
+						let email = jsonObject.Contacts[key][innerKey].Email;
+						let phone = jsonObject.Contacts[key][innerKey].PhoneNumber;
+						let dateCreated = jsonObject.Contacts[key][innerKey].DateCreated;
+						let tableRef = document.getElementsByClassName("contactTable")[0].getElementsByTagName("tbody")[0];
+						console.log(tableRef);
+						let newRow = tableRef.insertRow(-1);
+						newRow.id = contactID;
+						var newCell = newRow.insertCell();
+						newCell.appendChild(document.createTextNode(firstName));
+						var newCell = newRow.insertCell();
+						newCell.appendChild(document.createTextNode(lastName));
+						var newCell = newRow.insertCell();
+						newCell.appendChild(document.createTextNode(email));
+						var newCell = newRow.insertCell();
+						newCell.appendChild(document.createTextNode(phone));
+						var newCell = newRow.insertCell();
+						newCell.appendChild(document.createTextNode(dateCreated));
+						var newCell = newRow.insertCell();
+						newCell.innerHTML += '<td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup("editcontact.html", "editContact", 500, 700)"> </button><button type="button" id="delete" class="icon deleteButton popup" title="Click to delete contact!" onclick="popup("confirmdelete.html", "confirmDelete", 500, 400)"></button></td>'
+					});
 				});
 			}
 		}
