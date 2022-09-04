@@ -402,7 +402,7 @@ function searchContact()
 						newCell.appendChild(document.createTextNode(dateCreated));
 						var newCell = newRow.insertCell();
 						newCell.innerHTML += `<td class="col-actions">` + 
-											 `<button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup('editcontact.html', 'editContact', 500, 700)"></button>'` +
+											 `<button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup('editcontact.html', 'editContact', 500, 700)"></button>` +
 											 `<button type="button" id="delete" class="icon deleteButton popup" title="Click to delete contact!" onclick="popup('confirmdelete.html', 'confirmDelete', 500, 400)"></button>` +
 											 `</td>`;
 					});
