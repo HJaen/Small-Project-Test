@@ -90,6 +90,22 @@ body {
   color: #ff0000;
 }
 
+.confirm-button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.confirm-button:focus {
+  background: #275d29;
+}
+
 .icon {
   background-color: rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
