@@ -7,12 +7,10 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-// Add event listeners to each delete button
-// Calls delete on current row
 for (let x = 0; x < deleteBtns.length; x++)
 {
 	deleteBtns[x].addEventListener("click", () => {
-		deleteContact(deleteBtns[x]);	
+		deleteContact(deleteBtns[x]);
 	});
 }
 
@@ -302,9 +300,17 @@ function confirmAddButton()
 	}
 }
 
-function deleteContact(tableRow)
+function deleteContact(tableRowBtn)
 {
-	let contactID = tableRow.id;
+	let row = tableRowBtn.parentNode;
+
+	// Find the corresponding row to the button
+	while ( row && row.id == 'undefined')
+	{
+		row = row.parentNode;
+	}
+
+	let contactID = row.id;
 	let tmp = {ID:contactID};
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/DeleteContact.' + extension;
@@ -323,8 +329,6 @@ function deleteContact(tableRow)
 		};
 		xhr.send(jsonPayload);
 
-		// Re-display contacts to reflect change
-		displayContacts();
 	}
 	catch(err)
 	{
@@ -333,55 +337,62 @@ function deleteContact(tableRow)
 	}
 }
 
-function displayContacts() 
+function searchContacts()
 {
-	let url = urlBase + '/SeacrhContacts.' + extension;
-	let xhr = new XMLHttpRequest();
-	xhr.open("GET", url, true);
-	xhr.send();
+	let search = document.getElementById("searchText").value;
+	table.innerHTML = "";
+	table.innerHTML += "<thead>\n" +
+							"\t<tr>\n" +
+								"\t\t<th>First Name</th>\n" +
+								"\t\t<th>Last Name</th>\n" +
+								"\t\t<th>Email</th>\n" +
+								"\t\t<th>Phone Number</th>\n" +
+								"\t\t<th>Date Created</th>\n" +
+								"\t\t<th class='col-actions'>Actions</th>\n" +
+							"\t</tr>" +
+						"</thead>";
 
+	let contactsList = "";
+
+	let tmp = {search:search, ID:userId};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/SearchColors.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
 		xhr.onreadystatechange = function()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				// Reset table
-				table.innerHTML = "";
-				table.innerHTML += "<thead>\n" +
-										"\t<tr>\n" +
-											"\t\t<th>First Name</th>" +
-											"\t\t<th>Last Name</th>" +
-											"\t\t<th>Email</th>" +
-											"\t\t<th>Phone Number</th>" +
-											"\t\t<th>Date Created</th>" +
-											"\t\t<th class='col-actions'>Actions</th>" +
-										"\t</tr>" +
-									"</thead>";
 				let jsonObject = JSON.parse( xhr.responseText );
 
 				// Add new info to the table
 				Object.keys(jsonObject).forEach(key => {
 					let tableRow = document.createElement("tr");
-					let contactID = jsonObject.Contacts.ID;
-					let firstName = jsonObject.Contacs.ID.FirstName;
-					let lastName = jsonObject.Contacs.ID.LastName;
-					let email = jsonObject.Contacs.ID.Email;
-					let phone = jsonObject.Contacs.ID.PhoneNumber;
+					let contactID = jsonObject.Contacts.key;
+					let firstName = jsonObject.Contacs.key.FirstName;
+					let lastName = jsonObject.Contacs.key.LastName;
+					let email = jsonObject.Contacs.key.Email;
+					let phone = jsonObject.Contacs.key.PhoneNumber;
 					tableRow.id = contactID;
 					tableRow.innerHTML += "<td>" + firstName + "</td>\n";
 					tableRow.innerHTML += "<td>" + lastName + "</td>\n";
 					tableRow.innerHTML += "<td>" + email + "</td>\n";
 					tableRow.innerHTML += "<td>" + phone + "</td>\n";
 					tableRow.innerHTML += "<td>" + dateCreated + "</td>\n";
-					table.append(tableRow);
+					table.innerHTML += tableRow;
 				});
 			}
 		}
+
+		xhr.send( jsonPayload );
 	}
 	catch (err)
 	{
-		// Show error
 		console.log(err);
 	}
 }
