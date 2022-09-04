@@ -10,6 +10,7 @@
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         readCookie();
+        searchContact();
       }, false);
 
     </script>
@@ -68,42 +69,6 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Smith</td>
-                    <td>js@gmail.com</td>
-                    <td>111-222-3333</td>
-                    <td>8/29/2022</td>
-                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup('editcontact.html', 'editContact', 500, 700)">
-                      <button type="button" id="delete" class="icon deleteButton popup" title="Click to delete contact!" onclick="popup('confirmdelete.html', 'confirmDelete', 500, 400)"></button></td>
-                    </tr>
-                    <tr>
-                    <td>Man</td>
-                    <td>Person</td>
-                    <td>realemail@website.com</td>
-                    <td>111-111-1111</td>
-                    <td>1/1/1111</td>
-                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup('editcontact.html', 'editContact', 500, 700)">
-                      <button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!" onclick="popup('confirmdelete.html', 'confirmDelete', 500, 400)"></button></td>
-                    </tr>
-                    <tr>
-                    <td>R.</td>
-                    <td>Leinicker</td>
-                    <td>rleinicker@knights.ucf.edu</td>
-                    <td>101-202-3030</td>
-                    <td>8/29/2022</td>
-                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup('editcontact.html', 'editContact', 500, 700)">
-                      <button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!" onclick="popup('confirmdelete.html', 'confirmDelete', 500, 400)"></button></td>
-                    </tr>
-                    <tr>
-                    <td>Final Name</td>
-                    <td>Final other name</td>
-                    <td>lastone@gmail.com</td>
-                    <td>999-999-9999</td>
-                    <td>1/1/1</td>
-                    <td class="col-actions"><button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="popup('editcontact.html', 'editContact', 500, 700)">
-                      <button type="button" id="edit" class="icon deleteButton" title="Click to delete contact!" onclick="popup('confirmdelete.html', 'confirmDelete', 500, 400)"></button></td>
-                    </tr>
             </tbody>
           </table>
       </div>
