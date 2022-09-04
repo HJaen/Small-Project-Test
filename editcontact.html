@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Edit Contact</title>
+    <script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() 
+    {
+        readCookie();
+    }, false);
+    </script>
+    
+</head>
+<div class = "login-box">
+    <h2 id="title">Edit Contact</h2>
+    <form>
+        <div class="user-box">
+            <input type="text" id="editFirstName" name="" required="">
+            <label>First Name</label>
+        </div>
+        <div class="user-box">
+            <input type="text" id="editLastName" name="" required="">
+            <label>Last Name</label>
+        </div>
+        <div class="user-box">
+            <input type="text" id="editEmail" name="" required="">
+            <label>Email</label>
+        </div>
+        <div class="user-box">
+            <input type="text" id="editPhoneNumber" name="" required="">
+            <label>Phone Number</label>
+        </div>
+        <button type="button" id="confirmEditContactButton" class="buttons confirm-button" onclick="confirmEditButton();"> Edit Contact </button>
+    </form>
+    <button type="button" id="cancelEditContactButton" class="buttons confirm-button" onclick="cancelAddButton();"> Cancel </button>
+</div>
+
+</html>
