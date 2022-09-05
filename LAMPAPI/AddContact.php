@@ -11,9 +11,8 @@
     $phone = $inData["phone"];
     $userId = $inData["userID"];
 
-    // Eventually replace this with actual info
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-    // $conn = new mysqli("localhost", "root", "0afdbc3e76a812133be14d1c737c6766a3988364f36eb65d", "Contacts");     // Ask Fez
+    
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error );
@@ -55,22 +54,5 @@
                     '"dateCreated": ' . $dateCreated . ',' .
                     '"error": ""}';
         sendResultInfoAsJson( $retValue );
-    }
-
-    // Show Contacts on HTML as a queue (top is start)
-    function displayContacts($contactsArr)
-    {
-        foreach ($contactsArr as $row)
-        {
-            $htmlRow = "<tr>";
-            $htmlRow .= "\t<td>".$row['firstName']."</td>\n";
-            $htmlRow .= "\t<td>".$row['lastName']."</td>\n";
-            $htmlRow .= "\t<td>".$row['email']."</td>\n";
-            $htmlRow .= "\t<td>".$row->['phone']."</td>\n";
-            $htmlRow .= "\t<td>".$row->['dateCreated']."</td>\n";
-            $htmlRow .= "\t<td id=".$row->['id'].">".$row->['id']."</td>\n";
-            $htmlRow .= "</tr>";
-            echo $htmlRow;
-        }
     }
 ?>

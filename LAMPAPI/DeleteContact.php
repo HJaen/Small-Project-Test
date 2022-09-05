@@ -3,12 +3,9 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     $inData = getRequestInfo();
-
     $deleteID = $inData["ID"];
 
-    // Eventually replace this with actual info
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-    // $conn = new mysqli("localhost", "root", "0afdbc3e76a812133be14d1c737c6766a3988364f36eb65d", "Contacts");     // Ask Fez
     
     if( $conn->connect_error )
     {
@@ -30,7 +27,6 @@
             $conn->close();
             returnWithError($err);
         }
-        
     }
 
     function returnWithError( $err )
@@ -55,6 +51,4 @@
         header('Content-type: application/json');
         echo $obj;
     }
-
-
 ?>

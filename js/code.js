@@ -59,7 +59,6 @@ function doRegister()
 		document.getElementById("loginResult").innerHTML = "";
 
 		let tmp = {firstName:firstName,LastName:lastName,Login:login,Password:hash};
-	//	var tmp = {login:login,password:hash};
 		let jsonPayload = JSON.stringify( tmp );
 		
 		let url = urlBase + '/CreateUser.' + extension;
@@ -99,7 +98,6 @@ function doLogin()
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {login:login,password:hash};
-//	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -305,7 +303,7 @@ function deleteContact(tableRowBtn)
 	let row = tableRowBtn.parentNode;
 
 	// Find the corresponding row to the button
-	while ( row && row.id == 'undefined')
+	while ( row && row.id == 'undefined' )
 	{
 		row = row.parentNode;
 	}
@@ -332,7 +330,6 @@ function deleteContact(tableRowBtn)
 	}
 	catch(err)
 	{
-		// Add error somewhere on page too?
 		console.log(err);
 	}
 }
@@ -352,8 +349,6 @@ function searchContact()
 							"\t</tr>" +
 						"</thead>" + 
 						"<tbody></tbody>";
-	let actions = ""
-	let contactsList = "";
 
 	let tmp = {search:search, ID:userId};
 	let jsonPayload = JSON.stringify( tmp );
@@ -370,16 +365,16 @@ function searchContact()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				//console.log(jsonObject.Contacts);
-				// Add new info to the table
+
 				if(jsonObject.error)
 				{
 					console.log(jsonObject.error);
 					return;
 				}
+
+				// Add search result to the table
 				Object.keys(jsonObject.Contacts).forEach(key => {
 					Object.keys(jsonObject.Contacts[key]).forEach(innerKey => {
-						//console.log(innerKey);
 						let tableRow = document.createElement("tr");
 						let contactID = innerKey;
 						let firstName = jsonObject.Contacts[key][innerKey].FirstName;
