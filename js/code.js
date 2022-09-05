@@ -303,6 +303,7 @@ function confirmAddButton()
 
 function deleteContact(tableRowBtn)
 {
+	/*	dont think this is necessary
 	let row = tableRowBtn.parentNode;
 
 	// Find the corresponding row to the button
@@ -310,6 +311,7 @@ function deleteContact(tableRowBtn)
 	{
 		row = row.parentNode;
 	}
+	*/
 
 	let contactID = row.id;
 	let tmp = {ID:contactID};
