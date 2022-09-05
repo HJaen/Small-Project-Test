@@ -301,9 +301,13 @@ function confirmAddButton()
 	}
 }
 
-function deleteContact(tableRowID)
+function deleteContact(urlLink)
 {
-	
+	console.log(urlLink);
+	let paramString = urlLink.split('?')[1];
+	let params_arr = paramString.split('&');
+	let pair = params_arr[0].split('=');
+	let tableRowID = pair[1];
 	let tmp = {ID:tableRowID};
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/DeleteContact.' + extension;
