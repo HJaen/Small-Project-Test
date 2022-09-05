@@ -262,7 +262,10 @@ function searchColor()
 	}
 	
 }
-
+function cancelAddButton()
+{
+	window.location.href = "contact.html";
+}
 // Add contact to datebase 
 function confirmAddButton()
 {
@@ -271,9 +274,9 @@ function confirmAddButton()
 	let email = document.getElementById("addEmail").value;
 	let phone = document.getElementById("addPhoneNumber").value;
 
-	document.getElementById("contactAddResult").innerHTML = "";
+	//document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId,dateCreated:dateCreated};
+	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
