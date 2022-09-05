@@ -301,20 +301,10 @@ function confirmAddButton()
 	}
 }
 
-function deleteContact(tableRowBtn)
+function deleteContact(tableRowID)
 {
-	/*	dont think this is necessary
-	let row = tableRowBtn.parentNode;
-
-	// Find the corresponding row to the button
-	while ( row && row.id == 'undefined' )
-	{
-		row = row.parentNode;
-	}
-	*/
-
-	let contactID = row.id;
-	let tmp = {ID:contactID};
+	
+	let tmp = {ID:tableRowID};
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/DeleteContact.' + extension;
 	let xhr = new XMLHttpRequest();
@@ -327,7 +317,7 @@ function deleteContact(tableRowBtn)
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				table.deleteRow(row);
+				console.log("deleted ID"+tableRowID);
 			}
 		};
 		xhr.send(jsonPayload);
@@ -401,9 +391,11 @@ function searchContact()
 						var newCell = newRow.insertCell();
 						newCell.appendChild(document.createTextNode(dateCreated));
 						var newCell = newRow.insertCell();
+						let deleteRedirect = 'confirmdelete.html?ID=' + contactID;
+						let editRedirect = 'editcontact.html?FirstName=' + firstName+"?LastName="+lastName+"?Email="+email+"?PhoneNumber="+phone;
 						newCell.innerHTML += `<td class="col-actions">` + 
-											 `<button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="location.href='editcontact.html'"></button>` +
-											 `<button type="button" id="delete" class="icon deleteButton popup" title="Click to delete contact!" onclick="popup('confirmdelete.html', 'confirmDelete', 500, 400)"></button>` +
+											 `<button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="location.href='`+editRedirect+`'"></button>` +
+											 `<button type="button" id="delete" class="`+contactID+`deletebtn icon deleteButton popup" title="Click to delete contact!" onclick="popup('`+deleteRedirect+`', 'confirmDelete', 500, 400);"></button>` +
 											 `</td>`;
 					});
 				});
