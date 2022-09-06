@@ -4,6 +4,12 @@
     <script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">   
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+          readCookie();
+          searchContact();
+        }, false);
+    </script>
 </head>
 
 <div class = "login-box">
@@ -11,7 +17,7 @@
     <form>
         <button type="button" id="confirmDeleteContactButton" class="buttons confirm-button" onclick="deleteContact(window.location.href);"> Delete Contact </button>
     </form>
-    <button type="button" id="cancelDeleteContactButton" class="buttons confirm-button" onclick="cancelPopup();"> Cancel </button>
+    <button type="button" id="cancelDeleteContactButton" class="buttons confirm-button" onclick="self.close();"> Cancel </button>
 </div>
 
 </html>
