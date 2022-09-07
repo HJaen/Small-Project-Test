@@ -333,6 +333,39 @@ function deleteContact(urlLink)
 	}
 }
 
+function confirmEditButton()
+{
+	let firstName = document.getElementById("addFirstName").value;
+	let lastName = document.getElementById("addLastName").value;
+	let email = document.getElementById("addEmail").value;
+	let phone = document.getElementById("addPhoneNumber").value;
+
+	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId};
+	let jsonPayload = JSON.stringify( editJSON );
+
+	let url = urlBase + '/UpdateContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "applciation/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				console.log("updated contact");
+			}
+		};
+		xhr.send(jsonPayload);
+		windows.location.href = "contact.html";
+	}
+	catch(err)
+	{
+		console.log("error detected: " + err);
+	}
+}
+
 function searchContact()
 {
 	let search = document.getElementById("searchText").value;
