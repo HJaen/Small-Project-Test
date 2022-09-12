@@ -335,10 +335,10 @@ function deleteContact(urlLink)
 
 function confirmEditButton()
 {
-	let firstName = document.getElementById("addFirstName").value;
-	let lastName = document.getElementById("addLastName").value;
-	let email = document.getElementById("addEmail").value;
-	let phone = document.getElementById("addPhoneNumber").value;
+	let firstName = document.getElementById("editFirstName").value;
+	let lastName = document.getElementById("editLastName").value;
+	let email = document.getElementById("editEmail").value;
+	let phone = document.getElementById("editPhoneNumber").value;
 
 	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId};
 	let jsonPayload = JSON.stringify( editJSON );
