@@ -303,7 +303,7 @@ function confirmAddButton()
 
 function deleteContact(urlLink)
 {
-	console.log(urlLink);
+	//console.log(urlLink);
 	let paramString = urlLink.split('?')[1];
 	let params_arr = paramString.split('&');
 	let pair = params_arr[0].split('=');
