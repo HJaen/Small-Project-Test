@@ -432,7 +432,7 @@ function searchContact()
 						let editRedirect = 'editcontact.html?FirstName=' + firstName+"?LastName="+lastName+"?Email="+email+"?PhoneNumber="+phone;
 						newCell.innerHTML += `<td class="col-actions">` + 
 											 `<button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="location.href='`+editRedirect+`'"></button>` +
-											 `<button type="button" id="delete" class="`+contactID+`deletebtn icon deleteButton popup" title="Click to delete contact!" onclick="popup('`+deleteRedirect+`', 'confirmDelete', 500, 400);"></button>` +
+											 `<button type="button" id="delete" class="`+contactID+`deletebtn icon" title="Click to delete contact!" onclick="confirm('Delete this contact?');"></button>` +
 											 `</td>`;
 					});
 				});
