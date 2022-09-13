@@ -174,7 +174,10 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Welcome " + firstName + "!";
+		if(document.URL.includes("/contact.html"))
+		{
+			document.getElementById("userName").innerHTML = "Welcome " + firstName + "!";
+		}
 	}
 }
 
@@ -269,6 +272,10 @@ function cancelAddButton()
 // Add contact to datebase 
 function confirmAddButton()
 {
+	let EditUrl = window.location.href;
+   	const EditwordsArray = EditUrl.split("?");
+   	let EditIDUser = (EditwordsArray[5].split("="))[1];
+
 	let firstName = document.getElementById("addFirstName").value;
 	let lastName = document.getElementById("addLastName").value;
 	let email = document.getElementById("addEmail").value;
@@ -276,7 +283,7 @@ function confirmAddButton()
 
 	//document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId};
+	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone,ID:EditIDUser};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -341,7 +348,7 @@ function confirmEditButton()
 	let email = document.getElementById("editEmail").value;
 	let phone = document.getElementById("editPhoneNumber").value;
 
-	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,userID:userId};
+	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,ID:ID};
 	let jsonPayload = JSON.stringify( editJSON );
 
 	let url = urlBase + '/UpdateContact.' + extension;
@@ -359,7 +366,7 @@ function confirmEditButton()
 			}
 		};
 		xhr.send(jsonPayload);
-		windows.location.href = "contact.html";
+		window.location.href = "contact.html";
 	}
 	catch(err)
 	{
@@ -430,7 +437,7 @@ function searchContact()
 						newCell.appendChild(document.createTextNode(dateCreated));
 						var newCell = newRow.insertCell();
 						let deleteRedirect = 'confirmdelete.html?ID=' + contactID;
-						let editRedirect = 'editcontact.html?FirstName=' + firstName+"?LastName="+lastName+"?Email="+email+"?PhoneNumber="+phone;
+						let editRedirect = 'editcontact.html?FirstName=' + firstName+"?LastName="+lastName+"?Email="+email+"?PhoneNumber="+phone+"?ID="+contactID;
 						newCell.innerHTML += `<td class="col-actions">` + 
 											 `<button type="button" id="edit" class="icon editButton" title="Click to edit contact!" onclick="location.href='`+editRedirect+`'"></button>` +
 											 `<button type="button" id="delete" class="deletebtn deleteButton icon" title="Click to delete contact!" onclick="deleteContact(`+contactID+`);"></button>` +
