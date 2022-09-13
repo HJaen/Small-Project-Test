@@ -41,17 +41,18 @@
    let url = window.location.href;
    const wordsArray = url.split("?");
 
-   let firstName = (wordsArray[1].split("="))[1];
-   let lastName = (wordsArray[2].split("="))[1];
-   let email = (wordsArray[3].split("="))[1];
-   let phone = (wordsArray[4].split("="))[1];
+   let firstNameEdit = (wordsArray[1].split("="))[1];
+   console.log(firstName);
+   let lastNameEdit = (wordsArray[2].split("="))[1];
+   let emailEdit = (wordsArray[3].split("="))[1];
+   let phoneEdit = (wordsArray[4].split("="))[1];
 
    //console.log("Here are the credentials of the contact we want to edit: " + firstName + ", " + lastName + ", " + email + ", " + phone + ".");
 
-   document.getElementById("editFirstName").value = firstName;
-   document.getElementById("editLastName").value = lastName;
-   document.getElementById("editEmail").value = email;
-   document.getElementById("editPhoneNumber").value = phone;
+   document.getElementById("editFirstName").value = firstNameEdit;
+   document.getElementById("editLastName").value = lastNameEdit;
+   document.getElementById("editEmail").value = emailEdit;
+   document.getElementById("editPhoneNumber").value = phoneEdit;
 </script>
 
 </html>
