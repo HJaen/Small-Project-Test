@@ -19,7 +19,7 @@ def random_char(char_num):
        return ''.join(random.choice(string.ascii_letters) for _ in range(char_num))
 
 
-for i in range(num):
+for i in range(int(num)):
     email = random_char(7)+"@gmail.com"
     str = f"insert into Contacts (FirstName,LastName, Email,Phone,UserID) VALUES ('{fake.name().split()[0]}','{fake.name().split()[1]}','{email}','{phone_number.get_number()}','{UserID}');"
     print(str)
