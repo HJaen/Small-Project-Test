@@ -272,10 +272,6 @@ function cancelAddButton()
 // Add contact to datebase 
 function confirmAddButton()
 {
-	let EditUrl = window.location.href;
-   	const EditwordsArray = EditUrl.split("?");
-   	let EditIDUser = (EditwordsArray[5].split("="))[1];
-
 	let firstName = document.getElementById("addFirstName").value;
 	let lastName = document.getElementById("addLastName").value;
 	let email = document.getElementById("addEmail").value;
@@ -283,7 +279,7 @@ function confirmAddButton()
 
 	//document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone,ID:EditIDUser};
+	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -343,12 +339,16 @@ function deleteContact(contactID)
 
 function confirmEditButton()
 {
+	let EditUrl = window.location.href;
+	const EditwordsArray = EditUrl.split("?");
+	let EditIDUser = (EditwordsArray[5].split("="))[1];
+
 	let firstName = document.getElementById("editFirstName").value;
 	let lastName = document.getElementById("editLastName").value;
 	let email = document.getElementById("editEmail").value;
 	let phone = document.getElementById("editPhoneNumber").value;
 
-	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,ID:ID};
+	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,ID:EditIDUser};
 	let jsonPayload = JSON.stringify( editJSON );
 
 	let url = urlBase + '/UpdateContact.' + extension;
