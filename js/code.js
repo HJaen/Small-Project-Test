@@ -279,7 +279,7 @@ function confirmAddButton()
 
 	//document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone};
+	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone, userID:userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -297,6 +297,7 @@ function confirmAddButton()
 			}
 		};
 		xhr.send(jsonPayload);
+		window.location.href = "contact.html";
 	}
 	catch(err)
 	{
