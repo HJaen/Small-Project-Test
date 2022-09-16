@@ -5,6 +5,9 @@
     $inData = getRequestInfo();
 	$search = $inData["search"] . "%";
 	$ID = $inData["ID"];
+	$pageNumber = $inData["PageNumber"];
+	$no_of_records_per_page = 20;
+	$offset = ($pageNumber-1) * $no_of_records_per_page;
 	$foundResults = 0;
 
     //change later with the server's credentials
@@ -18,16 +21,23 @@
     else
     {
 		$desired = $inData["search"] . "%";
-		$query = "SELECT * FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired')";
+		$queryCount = "SELECT count(*) FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired')";
+		$resultCount = mysqli_query($conn,$queryCount);
+		$data=mysqli_fetch_array($resultCount);
+		$TotalCount = $data[0];
+
+		$query = "SELECT * FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired') LIMIT $offset, $no_of_records_per_page";
+		
 		//$stmt->bind_param("sssss", $desired, $desired, $desired, $desired, $inData["userID"]);	Should the userID be returned as well? Or just the F and L name, phone and email?
 		//$stmt->bind_param("ssss", $desired, $desired, $desired, $desired);
 		//$stmt->execute();
 
 		$stmt = $conn->query($query);
-
+		
 		if ($stmt->num_rows > 0) {
 			$searchResults ["Success"] = "200 ok";
-			$searchResults ["Length"] = $stmt->num_rows;
+			$searchResults ["TotalPages"] = ceil($TotalCount/$no_of_records_per_page);
+			$searchResults ["TotalContacts"] = $TotalCount;
 			$searchResults ["Contacts"] = [];
 			while($contact = $stmt->fetch_assoc())
 			{
