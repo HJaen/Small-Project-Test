@@ -6,7 +6,7 @@
 	$search = $inData["search"] . "%";
 	$ID = $inData["ID"];
 	$pageNumber = $inData["PageNumber"];
-	$no_of_records_per_page = 20;
+	$no_of_records_per_page = 35;
 	$offset = ($pageNumber-1) * $no_of_records_per_page;
 	$foundResults = 0;
 
