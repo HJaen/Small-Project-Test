@@ -10,9 +10,9 @@
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         readCookie();
-        searchContact();
+        searchContact(1);
+        window.pageCount = 1;
       }, false);
-
     </script>
 
   </head>
@@ -27,11 +27,12 @@
               <script>
                  function enterKeyPressed(event) {
                     if (event.keyCode == 13) {
-                       searchContact();
+                       searchContact(1);
+                       window.pageCount = 1;
                     }
                  }
               </script>
-              <button type="button" id="searchButton" class="buttons searchButton" title="Click to search contacts!" onclick="searchContact();"></button><br />
+              <button type="button" id="searchButton" class="buttons searchButton" title="Click to search contacts!" onclick="searchContact(1); window.pageCount = 1;"></button><br />
             </div>
           </div>
 
@@ -45,26 +46,6 @@
       <div id="contactTableDiv">
         <br /><br />
         <table>
-
-          <script>
-              function popup(pageURL, pageTitle, popupWinWidth, popupWinHeight) {
-                  var left = (screen.width - popupWinWidth) / 2; ;
-                  var top = (screen.height - popupWinHeight) / 4;
-                  var myWindow = window.open(pageURL, pageTitle,
-                          'resizable=yes, width=' + popupWinWidth + ', height=' + popupWinHeight + ', top=' + top + ', left=' + left);
-                          var popupTick = setInterval(function() {
-                  if (myWindow.closed) {
-                    clearInterval(myWindow);
-                    location.reload();
-                    }
-                  }, 500);
-                  function closeWin()
-                  {
-                    myWindow.close();
-                  }
-              }
-          </script>
-
           <table class="contactTable">
             <thead>
               <tr>
@@ -79,9 +60,15 @@
             <tbody>
             </tbody>
           </table>
-      </div>
-
-      
+      </div>  
   </body>
-
+  <script>
+    window.onscroll = function(ev) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            window.pageCount++;
+            console.log("At bottom of page");
+            searchContact(window.pageCount);
+    }
+    };
+  </script>
 </html>
