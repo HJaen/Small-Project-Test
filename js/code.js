@@ -375,9 +375,10 @@ function confirmEditButton()
 	}
 }
 
-function searchContact()
+function searchContact(page)
 {
 	let search = document.getElementById("searchText").value;
+	if(page <= 1){
 	table.innerHTML = "";
 	table.innerHTML += "<thead>\n" +
 							"\t<tr>\n" +
@@ -390,8 +391,8 @@ function searchContact()
 							"\t</tr>" +
 						"</thead>" + 
 						"<tbody></tbody>";
-
-	let tmp = {search:search, ID:userId};
+	}
+	let tmp = {search:search, ID:userId, PageNumber:page};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchContacts.' + extension;
