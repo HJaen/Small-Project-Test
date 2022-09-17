@@ -27,14 +27,12 @@
         if($affectedRows > 0)
         {
             http_response_code(200);
-            $conn->close();
             returnWithSuccess("Done. No error.");
         }
         else
         {
             http_response_code(406);
             $err = "Could not change row.";
-            $conn->close();
             returnWithError($err);
         }
 
