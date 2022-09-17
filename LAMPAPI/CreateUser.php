@@ -53,7 +53,7 @@
 
     function returnWithError( $err )
     {
-        $retValue = '{"error":"' . $err . '"}';
+        $retValue = '{"Error":"' . $err . '"}';
         sendResultInfoAsJson( $retValue );
     }
 
@@ -65,7 +65,7 @@
 
     function returnWithInfo( $firstName, $lastName, $id )
     {
-        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '}';
+        $retValue = '{"ID":' . $id . ',"FirstName":"' . $firstName . '","LastName":"' . $lastName . '}';
         sendResultInfoAsJson( $retValue );
     }
 ?>

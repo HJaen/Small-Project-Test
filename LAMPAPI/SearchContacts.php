@@ -70,13 +70,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{"Error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
 	function returnWithInfo( $results )
 	{
-		$retValue = '{"results":[' . $results . '],"error":""}';
+		$retValue = '{"Results":[' . $results . ']}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

@@ -55,7 +55,7 @@
 
     function returnWithError( $err )
     {
-        $retValue = '{"error":"' . $err . '"}';
+        $retValue = '{"Error":"' . $err . '"}';
         sendResultInfoAsJson( $retValue );
     }
 
@@ -67,13 +67,13 @@
 
     function returnWithInfo($firstName, $lastName, $email, $phone, $userId, $query)
     {
-        $retValue = '{"firstName": ' . $firstName . ',' .
-                    '"lastName": ' . $lastName . ',' .
-                    '"email": ' . $email . ',' .
-                    '"phone": ' . $phone . ',' .
-                    '"userID": ' . $userId . ',' .
-                    '"query": ' . $query . ',' .
-                    '"error": ""}';
+        $retValue = '{"FirstName": ' . $firstName . ',' .
+                    '"LastName": ' . $lastName . ',' .
+                    '"Email": ' . $email . ',' .
+                    '"Phone": ' . $phone . ',' .
+                    '"UserID": ' . $userId . ',' .
+                    '"Query": ' . $query . ',' .
+                    '"Error": ""}';
         sendResultInfoAsJson( $retValue );
     }
 ?>
