@@ -24,10 +24,10 @@
         }
         else
         {
-            http_response_code(406);
+            http_response_code(404);
             returnWithError("Record Not Found.");
         }
-        
+
         $stmt->close();
         $conn->close();
     }

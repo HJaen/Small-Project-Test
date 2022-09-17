@@ -6,16 +6,16 @@
     $inData = getRequestInfo();
 
     // Contact info
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
-    $email = $inData["email"];
-    $phone = $inData["phone"];
+    $firstName = $inData["FirstName"];
+    $lastName = $inData["LastName"];
+    $email = $inData["Email"];
+    $phone = $inData["Phone"];
     $ID = $inData["ID"];
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
     if( $conn->connect_error )
     {
-        http_response_code(504);
+        http_response_code(502);
         returnWithError( $conn->connect_error );
     }
     else
@@ -37,7 +37,7 @@
             $conn->close();
             returnWithError($err);
         }
-        
+
         $stmt->close();
         $conn->close();
     }

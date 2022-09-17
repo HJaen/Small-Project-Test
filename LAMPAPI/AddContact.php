@@ -5,11 +5,11 @@
     $inData = getRequestInfo();
 
     // Contact info
-    $firstName = $inData["firstName"];
-    $lastName = $inData["lastName"];
-    $email = $inData["email"];
-    $phone = $inData["phone"];
-    $userId = $inData["userID"];
+    $firstName = $inData["FirstName"];
+    $lastName = $inData["LastName"];
+    $email = $inData["Email"];
+    $phone = $inData["Phone"];
+    $userId = $inData["UserID"];
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
     
@@ -54,13 +54,13 @@
 
     function returnWithInfo($firstName, $lastName, $email, $phone, $userId, $dateCreated)
     {
-        $retValue = '{"firstName": ' . $firstName . ',' .
-                    '"lastName": ' . $lastName . ',' .
-                    '"email": ' . $email . ',' .
-                    '"phone": ' . $phone . ',' .
-                    '"userID": ' . $userId . ',' .
-                    '"dateCreated": ' . $dateCreated . ',' .
-                    '"error": ""}';
+        $retValue = '{"FirstName": ' . $firstName . ',' .
+                    '"LastName": ' . $lastName . ',' .
+                    '"Email": ' . $email . ',' .
+                    '"Phone": ' . $phone . ',' .
+                    '"UserID": ' . $userId . ',' .
+                    '"DateCreated": ' . $dateCreated . ',' .
+                    '"Error": ""}';
         sendResultInfoAsJson( $retValue );
     }
 ?>

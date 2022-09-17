@@ -6,10 +6,10 @@
     $inData = getRequestInfo();
 
     $id = 0;
-    $firstName = $inData["firstName"];
+    $firstName = $inData["FirstName"];
     $lastName = $inData["LastName"];
-    $Login = $inData["Login"];
-    $Password = $inData["Password"];
+    $login = $inData["Login"];
+    $password = $inData["Password"];
 
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
@@ -23,7 +23,7 @@
 
         try {
             $stmt = $conn->prepare("INSERT into Users(FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
-            $stmt->bind_param("ssss", $inData["firstName"], $inData["LastName"], $inData["Login"], $inData["Password"]);
+            $stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
             $stmt->execute();
             http_response_code(200);
             returnWithSuccess("Created new user.");

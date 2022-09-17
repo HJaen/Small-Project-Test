@@ -12,12 +12,12 @@
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
     if ($conn->connect_error) 
 	{
-        http_response_code(504);
+        http_response_code(502);
 		returnWithError( $conn->connect_error );
 	}
     else
     {
-		$desired = "%" . $inData["search"] . "%";
+		$desired = "%" . $inData["Search"] . "%";
 		$queryCount = "SELECT count(*) FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired')";
 		$resultCount = mysqli_query($conn,$queryCount);
 		$data=mysqli_fetch_array($resultCount);
@@ -49,10 +49,10 @@
 		}
 		else
 		{
-			http_response_code(406);
+			http_response_code(404);
 			returnWithError("No contacts found that match your search.");
 		}
-		
+
 		$stmt->close();
         $conn->close();
 	}

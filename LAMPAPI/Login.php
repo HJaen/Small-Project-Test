@@ -6,17 +6,19 @@
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
+	$login = $inData["Login"];
+	$password = $inData["Password"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 	if( $conn->connect_error )
 	{
-        http_response_code(504);
+        http_response_code(502);
 		returnWithError( $conn->connect_error );
 	}
 	else
 	{
 		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt->bind_param("ss", $login, $password);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
@@ -27,7 +29,7 @@
 		}
 		else
 		{
-			http_response_code(406);
+			http_response_code(404);
 			returnWithError("No Records Found");
 		}
 

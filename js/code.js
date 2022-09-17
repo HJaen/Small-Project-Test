@@ -58,7 +58,7 @@ function doRegister()
 		
 		document.getElementById("loginResult").innerHTML = "";
 
-		let tmp = {firstName:firstName,LastName:lastName,Login:login,Password:hash};
+		let tmp = {FirstName:firstName,LastName:lastName,Login:login,Password:hash};
 		let jsonPayload = JSON.stringify( tmp );
 		
 		let url = urlBase + '/CreateUser.' + extension;
@@ -97,7 +97,7 @@ function doLogin()
 	
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:hash};
+	let tmp = {Login:login,Password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -195,7 +195,7 @@ function addColor()
 	let newColor = document.getElementById("colorText").value;
 	document.getElementById("colorAddResult").innerHTML = "";
 
-	let tmp = {color:newColor,userId,userId};
+	let tmp = {Color:newColor,userId,userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddColor.' + extension;
@@ -228,7 +228,7 @@ function searchColor()
 	
 	let colorList = "";
 
-	let tmp = {search:srch,userId:userId};
+	let tmp = {Search:srch,UserID:userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchColors.' + extension;
@@ -279,7 +279,7 @@ function confirmAddButton()
 
 	//document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,email:email,phone:phone, userID:userId};
+	let tmp = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone, UserID:userId};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -392,7 +392,7 @@ function searchContact(page)
 						"</thead>" + 
 						"<tbody></tbody>";
 	}
-	let tmp = {search:search, ID:userId, PageNumber:page};
+	let tmp = {Search:search, ID:userId, PageNumber:page};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchContacts.' + extension;
