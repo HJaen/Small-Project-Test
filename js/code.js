@@ -127,6 +127,11 @@ function doLogin()
 	
 				window.location.href = "contact.html";
 			}
+			else if (this.status == 404)
+			{
+				document.getElementById("loginResult").innerHTML = "Login does not exist";
+				return;
+			}
 		};
 		xhr.send(jsonPayload);
 	}
