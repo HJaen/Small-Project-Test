@@ -354,7 +354,7 @@ function confirmEditButton()
 	let email = document.getElementById("editEmail").value;
 	let phone = document.getElementById("editPhoneNumber").value;
 
-	let editJSON = {firstName:firstName,lastName:lastName,email:email,phone:phone,ID:EditIDUser};
+	let editJSON = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone,ID:EditIDUser};
 	let jsonPayload = JSON.stringify( editJSON );
 
 	let url = urlBase + '/UpdateContact.' + extension;
