@@ -25,7 +25,7 @@
 		if( $row = $result->fetch_assoc()  )
 		{
 			// http_response_code(200);
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
 		}
 		else
 		{
