@@ -17,7 +17,11 @@
 	}
     else
     {
+<<<<<<< HEAD
 		$desired = "%" . $inData["Search"] . "%";
+=======
+		$desired = $inData["search"] . "%";
+>>>>>>> 8792f8715ad1add1eb16c3dd83e096f1cc287363
 		$queryCount = "SELECT count(*) FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired')";
 		$resultCount = mysqli_query($conn,$queryCount);
 		$data=mysqli_fetch_array($resultCount);
