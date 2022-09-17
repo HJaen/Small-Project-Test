@@ -10,6 +10,7 @@
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 	if( $conn->connect_error )
 	{
+        http_response_code(504);
 		returnWithError( $conn->connect_error );
 	}
 	else
@@ -21,10 +22,12 @@
 
 		if( $row = $result->fetch_assoc()  )
 		{
+			http_response_code(200);
 			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 		}
 		else
 		{
+			http_response_code(406);
 			returnWithError("No Records Found");
 		}
 

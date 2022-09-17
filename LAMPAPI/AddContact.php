@@ -15,6 +15,7 @@
     
     if( $conn->connect_error )
     {
+        http_response_code(502);
         returnWithError( $conn->connect_error );
     }
     else
@@ -23,6 +24,7 @@
         $stmt->bind_param("sssss", $firstName, $lastName, $email, $phone, $userId);
         $stmt->execute();
         $stmt->close();
+        http_response_code(200);
         $conn->close();
         returnWithError("Done. No error.");
     }

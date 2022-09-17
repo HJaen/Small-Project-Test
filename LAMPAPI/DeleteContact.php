@@ -9,6 +9,7 @@
     
     if( $conn->connect_error )
     {
+        http_response_code(502);
         returnWithError( $conn->connect_error );
     }
     else
@@ -18,11 +19,13 @@
         $affectedRows = mysqli_affected_rows($conn);
         if($affectedRows > 0)
         {
+            http_response_code(200);
             $conn->close();
             returnWithSuccess("Done. No error.");
         }
         else
         {
+            http_response_code(406);
             $err = "Record Not Found.";
             $conn->close();
             returnWithError($err);

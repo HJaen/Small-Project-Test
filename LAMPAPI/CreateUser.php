@@ -14,6 +14,7 @@
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
     if( $conn->connect_error )
     {
+        http_response_code(502);
         returnWithError( $conn->connect_error );
     }
     else
@@ -22,6 +23,7 @@
         $stmt->bind_param("ssss", $inData["firstName"], $inData["LastName"], $inData["Login"], $inData["Password"]);
         $stmt->execute();
         $stmt->close();
+        http_response_code(200);
         $conn->close();
         returnWithError("Done. No error.");
     }

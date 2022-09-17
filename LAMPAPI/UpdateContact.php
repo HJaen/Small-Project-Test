@@ -15,6 +15,7 @@
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
     if( $conn->connect_error )
     {
+        http_response_code(504);
         returnWithError( $conn->connect_error );
     }
     else
@@ -25,11 +26,13 @@
         
         if($affectedRows > 0)
         {
+            http_response_code(200);
             $conn->close();
             returnWithSuccess("Done. No error.");
         }
         else
         {
+            http_response_code(406);
             $err = "Could not change row.";
             $conn->close();
             returnWithError($err);
