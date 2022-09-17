@@ -38,7 +38,6 @@
             returnWithError($err);
         }
 
-        $stmt->close();
         $conn->close();
     }
 

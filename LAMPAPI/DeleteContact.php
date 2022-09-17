@@ -28,7 +28,6 @@
             returnWithError("Record Not Found.");
         }
 
-        // $stmt->close();
         $conn->close();
     }
 
