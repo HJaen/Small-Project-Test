@@ -25,7 +25,10 @@
         if($affectedRows > 0)
         {
             $conn->close();
-            returnWithSuccess("Done. No error.");
+            // returnWithSuccess("Done. No error.");
+
+            // DEBUG
+            returnWithInfo($firstName, $lastName, $email, $phone, $ID, $query);
         }
         else
         {
@@ -58,14 +61,14 @@
         sendResultInfoAsJson( $retValue );
     }
 
-    function returnWithInfo($firstName, $lastName, $email, $phone, $userId, $dateCreated)
+    function returnWithInfo($firstName, $lastName, $email, $phone, $userId, $query)
     {
         $retValue = '{"firstName": ' . $firstName . ',' .
                     '"lastName": ' . $lastName . ',' .
                     '"email": ' . $email . ',' .
                     '"phone": ' . $phone . ',' .
                     '"userID": ' . $userId . ',' .
-                    '"dateCreated": ' . $dateCreated . ',' .
+                    '"query": ' . $query . ',' .
                     '"error": ""}';
         sendResultInfoAsJson( $retValue );
     }
