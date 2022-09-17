@@ -149,6 +149,7 @@ body {
   border: 1;
   background-size: 100%;
   border-color: #fff;
+  border-style: solid;
   border-radius: 25%;
 }
 .searchButton:hover {
