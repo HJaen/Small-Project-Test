@@ -369,8 +369,8 @@ function confirmEditButton()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				console.log("updated contact");
+				window.location.href = "contact.html";
 			}
-			window.location.href = "contact.html";
 		};
 		xhr.send(jsonPayload);
 	}
