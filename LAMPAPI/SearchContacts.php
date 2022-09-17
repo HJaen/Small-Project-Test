@@ -3,7 +3,6 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     $inData = getRequestInfo();
-	$search = "%" . $inData["search"] . "%";
 	$ID = $inData["ID"];
 	$pageNumber = $inData["PageNumber"];
 	$no_of_records_per_page = 35;
@@ -17,7 +16,7 @@
 	}
     else
     {
-		$desired = $inData["search"] . "%";
+		$desired = "%" . $inData["search"] . "%";
 		$queryCount = "SELECT count(*) FROM Contacts WHERE UserID=$ID AND (FirstName like '$desired' or LastName like '$desired')";
 		$resultCount = mysqli_query($conn,$queryCount);
 		$data=mysqli_fetch_array($resultCount);
