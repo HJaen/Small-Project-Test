@@ -53,7 +53,6 @@
 			returnWithError("No contacts found that match your search.");
 		}
 
-		$stmt->close();
         $conn->close();
 	}
 
