@@ -365,9 +365,9 @@ function confirmEditButton()
 			{
 				console.log("updated contact");
 			}
+			window.location.href = "contact.html";
 		};
 		xhr.send(jsonPayload);
-		window.location.href = "contact.html";
 	}
 	catch(err)
 	{
