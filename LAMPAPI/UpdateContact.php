@@ -19,20 +19,14 @@
     }
     else
     {
-        $query = "UPDATE Contacts SET FirstName = '$firstName', LastName = '$lastName', Email = '$email', Phone = '$phone' WHERE ID=$ID;";
+        $query = 'UPDATE Contacts SET FirstName="$firstName",LastName="$lastName",Email="$email",Phone="$phone" WHERE ID=$ID';
         $stmt = $conn->query($query);
         $affectedRows = mysqli_affected_rows($conn);
 
-        // DEBUG
-        returnWithInfo($firstName, $lastName, $email, $phone, $ID, $query);
-        
         if($affectedRows > 0)
         {
             $conn->close();
-            // returnWithSuccess("Done. No error.");
-
-            // DEBUG
-            returnWithInfo($firstName, $lastName, $email, $phone, $ID, $query);
+            returnWithSuccess("Done. No error.");
         }
         else
         {
