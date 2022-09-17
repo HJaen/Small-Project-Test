@@ -12,7 +12,7 @@
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 	if( $conn->connect_error )
 	{
-        // http_response_code(502);
+        http_response_code(502);
 		returnWithError( $conn->connect_error );
 	}
 	else
@@ -24,12 +24,12 @@
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			// http_response_code(200);
+			http_response_code(200);
 			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
 		}
 		else
 		{
-			// http_response_code(404);
+			http_response_code(404);
 			returnWithError("No Records Found");
 		}
 

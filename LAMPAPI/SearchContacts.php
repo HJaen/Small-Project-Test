@@ -12,7 +12,7 @@
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
     if ($conn->connect_error) 
 	{
-        // http_response_code(502);
+        http_response_code(502);
 		returnWithError( $conn->connect_error );
 	}
     else
@@ -28,7 +28,7 @@
 		$stmt = $conn->query($query);
 		
 		if ($stmt->num_rows > 0) {
-			// http_response_code(200);
+			http_response_code(200);
 			$searchResults ["Success"] = "200 ok";
 			$searchResults ["TotalPages"] = ceil($TotalCount/$no_of_records_per_page);
 			$searchResults ["TotalContacts"] = $TotalCount;
@@ -49,7 +49,7 @@
 		}
 		else
 		{
-			// http_response_code(404);
+			http_response_code(404);
 			returnWithError("No contacts found that match your search.");
 		}
 

@@ -114,12 +114,12 @@ function doLogin()
 				let jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.ID;
 		
-				if( userId < 1 )
+				if( userId < 1 || userId == undefined)
 				{		
 					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 					return;
 				}
-		
+
 				firstName = jsonObject.FirstName;
 				lastName = jsonObject.LastName;
 
