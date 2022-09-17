@@ -19,10 +19,10 @@
     }
     else
     {
-        $query = 'UPDATE Contacts SET FirstName="$firstName",LastName="$lastName",Email="$email",Phone="$phone" WHERE ID=$ID';
+        $query = "UPDATE Contacts SET FirstName='$firstName',LastName='$lastName',Email='$email',Phone='$phone' WHERE ID=$ID";
         $stmt = $conn->query($query);
         $affectedRows = mysqli_affected_rows($conn);
-
+        
         if($affectedRows > 0)
         {
             $conn->close();
