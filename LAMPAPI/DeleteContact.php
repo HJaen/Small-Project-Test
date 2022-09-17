@@ -20,16 +20,16 @@
         if($affectedRows > 0)
         {
             http_response_code(200);
-            $conn->close();
-            returnWithSuccess("Done. No error.");
+            returnWithSuccess("Deleted contact.");
         }
         else
         {
             http_response_code(406);
-            $err = "Record Not Found.";
-            $conn->close();
-            returnWithError($err);
+            returnWithError("Record Not Found.");
         }
+        
+        $stmt->close();
+        $conn->close();
     }
 
     function returnWithError( $err )

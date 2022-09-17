@@ -52,6 +52,9 @@
 			http_response_code(406);
 			returnWithError("No contacts found that match your search.");
 		}
+		
+		$stmt->close();
+        $conn->close();
 	}
 
     function getRequestInfo()

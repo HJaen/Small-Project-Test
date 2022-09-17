@@ -24,9 +24,9 @@
         $stmt->bind_param("sssss", $firstName, $lastName, $email, $phone, $userId);
         $stmt->execute();
         $stmt->close();
-        http_response_code(200);
         $conn->close();
-        returnWithError("Done. No error.");
+        http_response_code(200);
+        returnWithSuccess("Added new contact.");
     }
 
     function getRequestInfo()
@@ -43,6 +43,12 @@
     function returnWithError( $err )
     {
         $retValue = '{"error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
+
+    function returnWithSuccess( $msg )
+    {
+        $retValue = '{"Sucesss":"' . $msg . '"}';
         sendResultInfoAsJson( $retValue );
     }
 

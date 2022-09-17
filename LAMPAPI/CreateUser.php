@@ -11,6 +11,7 @@
     $Login = $inData["Login"];
     $Password = $inData["Password"];
 
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
     if( $conn->connect_error )
     {
@@ -19,13 +20,24 @@
     }
     else
     {
-        $stmt = $conn->prepare("INSERT into Users(FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
-        $stmt->bind_param("ssss", $inData["firstName"], $inData["LastName"], $inData["Login"], $inData["Password"]);
-        $stmt->execute();
+
+        try {
+            $stmt = $conn->prepare("INSERT into Users(FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
+            $stmt->bind_param("ssss", $inData["firstName"], $inData["LastName"], $inData["Login"], $inData["Password"]);
+            $stmt->execute();
+            http_response_code(200);
+            returnWithSuccess("Created new user.");
+        } catch (\mysqli_sql_exception $e) {
+            if ($e->getCode() === 1062) {
+                returnWithError("Username is already being used!");
+                http_response_code(403);
+            } else {
+                throw $e;
+            }
+        }
+
         $stmt->close();
-        http_response_code(200);
         $conn->close();
-        returnWithError("Done. No error.");
     }
 
     function getRequestInfo()
@@ -45,9 +57,15 @@
         sendResultInfoAsJson( $retValue );
     }
 
+    function returnWithSuccess( $msg )
+    {
+        $retValue = '{"Sucesss":"' . $msg . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
+
     function returnWithInfo( $firstName, $lastName, $id )
     {
-        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '}';
         sendResultInfoAsJson( $retValue );
     }
 ?>

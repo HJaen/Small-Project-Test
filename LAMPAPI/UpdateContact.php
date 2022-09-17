@@ -37,6 +37,9 @@
             $conn->close();
             returnWithError($err);
         }
+        
+        $stmt->close();
+        $conn->close();
     }
 
     function getRequestInfo()
