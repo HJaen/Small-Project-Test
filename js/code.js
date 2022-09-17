@@ -331,6 +331,7 @@ function deleteContact(contactID)
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				console.log("deleted ID"+contactID);
+				window.location.reload();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -340,7 +341,6 @@ function deleteContact(contactID)
 	{
 		console.log(err);
 	}
-	window.location.reload();
 }
 
 function confirmEditButton()
