@@ -40,7 +40,7 @@
 
     function returnWithSuccess( $msg )
     {
-        $retValue = '{"Sucesss":"' . $msg . '"}';
+        $retValue = '{"Sucesss": "' . $msg . '"}';
         sendResultInfoAsJson( $retValue );
     }
 
