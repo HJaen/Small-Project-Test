@@ -56,9 +56,9 @@ function CheckAddFields()
 	} else if (lastName == "") {
 		return [false, "Please enter Last Name"];
 	} else if (email == "" || !emailRegex.test(email)) {
-		return [false, "Please enter Last Name"];
+		return [false, "Please enter valid Email"];
 	} else if (phone == "" || !phoneRegex.test(phone)) {
-		return [false, "Please enter Last Name"];
+		return [false, "Please enter valid Phone Number"];
 	} else {
 		return [true, ""];
 	}
