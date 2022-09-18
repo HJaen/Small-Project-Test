@@ -96,7 +96,7 @@ body {
 .confirm-button {
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: rgba(76, 175, 80, 1);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -105,8 +105,13 @@ body {
   cursor: pointer;
 }
 
+.confirm-button:hover {
+  background-color: rgba(76, 175, 80, 0.6);
+  cursor: pointer;
+}
+
 .confirm-button:focus {
-  background: #275d29;
+  background: rgba(76, 175, 80, 0.25);
 }
 
 .icon {
@@ -157,6 +162,7 @@ body {
 }
 .searchButton:hover {
   background-color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
 }
 .searchButton:active {
   background-color: rgba(255, 255, 255, 0.6)
