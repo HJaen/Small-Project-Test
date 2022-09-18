@@ -269,7 +269,7 @@ function confirmAddButton()
 	if (!check[0]) {
 		document.getElementById("contactAddResult").innerHTML = check[1];
 	} else {
-		let tmp = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone, UserID:userId};
+		let tmp = {FirstName:contactFirstName,LastName:contactLastName,Email:contactEmail,Phone:contactPhone, UserID:userId};
 		let jsonPayload = JSON.stringify( tmp );
 	
 		let url = urlBase + '/AddContact.' + extension;
