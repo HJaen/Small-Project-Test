@@ -41,7 +41,7 @@ function CheckRegisterFields()
 	return [true,""];
 }
 
-function CheckAddFields()
+function CheckContactFields(contactFirstName, contactLastName, contactEmail, contactPhone)
 {
 	// From regexr.com/2rhq7
 	const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
@@ -49,18 +49,18 @@ function CheckAddFields()
 	// From regexr.com/38pvb
 	const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/g;
 	
-	let firstName = document.getElementById("firstName").value;
-	let lastName = document.getElementById("lastName").value;
-	let email = document.getElementById("email").value;
-	let phone = document.getElementById("phoneNumber").value;
+	let contactFirstName = document.getElementById("contactFirstName").value;
+	let contactLastName = document.getElementById("contactLastName").value;
+	let contactEmail = document.getElementById("contactEmail").value;
+	let contactPhone = document.getElementById("contactPhoneNumber").value;
 
-	if (firstName == "") {
+	if (contactFirstName == "") {
 		return [false, "Please enter First Name"];
-	} else if (lastName == "") {
+	} else if (contactLastName == "") {
 		return [false, "Please enter Last Name"];
-	} else if (email == "" || !emailRegex.test(email)) {
+	} else if (contactEmail == "" || !emailRegex.test(contactEmail)) {
 		return [false, "Please enter valid Email"];
-	} else if (phone == "" || !phoneRegex.test(phone)) {
+	} else if (contactPhone == "" || !phoneRegex.test(contactPhone)) {
 		return [false, "Please enter valid Phone Number"];
 	} else {
 		return [true, ""];
@@ -265,12 +265,12 @@ function cancelAddButton()
 // Add contact to datebase 
 function confirmAddButton()
 {
-	let firstName = document.getElementById("firstName").value;
-	let lastName = document.getElementById("lastName").value;
-	let email = document.getElementById("email").value;
-	let phone = document.getElementById("phoneNumber").value;
+	let contactFirstName = document.getElementById("contactFirstName").value;
+	let contactLastName = document.getElementById("contactLastName").value;
+	let contactEmail = document.getElementById("contactEmail").value;
+	let contactPhone = document.getElementById("contactPhoneNumber").value;
 
-	let check = CheckAddFields(); 
+	let check = CheckContactFields(contactFirstName, contactLastName, contactEmail, contactPhone); 
 	if (!check[0]) {
 		document.getElementById("contactAddResult").innerHTML = check[1];
 	} else {
@@ -339,17 +339,18 @@ function confirmEditButton()
 	let EditUrl = window.location.href;
 	const EditwordsArray = EditUrl.split("?");
 	let EditIDUser = (EditwordsArray[5].split("="))[1];
+	
+	let contactFirstName = document.getElementById("contactFirstName").value;
+	let contactLastName = document.getElementById("contactLastName").value;
+	let contactEmail = document.getElementById("contactEmail").value;
+	let contactPhone = document.getElementById("contactPhoneNumber").value;
 
-	let check = CheckAddFields(); 
+	let check = CheckContactFields(contactFirstName, contactLastName, contactEmail, contactPhone); 
 	if (!check[0]) {
 		document.getElementById("contactEditResult").innerHTML = check[1];
 	} else {
-		let firstName = document.getElementById("firstName").value;
-		let lastName = document.getElementById("lastName").value;
-		let email = document.getElementById("email").value;
-		let phone = document.getElementById("phoneNumber").value;
 	
-		let editJSON = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone,ID:EditIDUser};
+		let editJSON = {FirstName:contactFirstName,LastName:contactLastName,Email:contactEmail,Phone:contactPhone,ID:EditIDUser};
 		let jsonPayload = JSON.stringify( editJSON );
 	
 		let url = urlBase + '/UpdateContact.' + extension;
