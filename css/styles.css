@@ -125,6 +125,7 @@ body {
 }
 .editButton:hover {
   background-color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
 }
 .editButton:active {
   background-color: rgba(255, 255, 255, 0.6)
@@ -134,6 +135,7 @@ body {
 }
 .deleteButton:hover {
   background-color: rgba(255, 0, 0, 0.2);
+  cursor: pointer;
 }
 .deleteButton:active {
   background-color: rgba(255, 0, 0, 0.6)
@@ -232,6 +234,7 @@ a {
 }
 a:hover {
   text-decoration: underline 2px #fff;;
+  cursor: pointer;
 }
 li {
   list-style: none;
