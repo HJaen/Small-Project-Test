@@ -14,7 +14,7 @@ for (let x = 0; x < deleteBtns.length; x++)
 	});
 }
 
-function CheckFields()
+function CheckRegisterFields()
 {
 	let firstName = document.getElementById("FirstName").value;
 	let lastName = document.getElementById("LastName").value;
@@ -41,11 +41,35 @@ function CheckFields()
 	return [true,""];
 }
 
+function CheckAddFields()
+{
+	const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+	const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/g;
+	
+	let firstName = document.getElementById("addFirstName").value;
+	let lastName = document.getElementById("addLastName").value;
+	let email = document.getElementById("addEmail").value;
+	let phone = document.getElementById("addPhoneNumber").value;
+
+	if (firstName == "") {
+		return [false, "Please enter First Name"];
+	} else if (lastName == "") {
+		return [false, "Please enter Last Name"];
+	} else if (email == "" || !emailRegex.test(email)) {
+		return [false, "Please enter Last Name"];
+	} else if (phone == "" || !phoneRegex.test(phone)) {
+		return [false, "Please enter Last Name"];
+	} else {
+		return [true, ""];
+	}
+	
+}
+
 function doRegister()
 {
-	if(!CheckFields()[0])
+	if(!CheckRegisterFields()[0])
 	{
-		document.getElementById("loginResult").innerHTML = CheckFields()[1];
+		document.getElementById("loginResult").innerHTML = CheckRegisterFields()[1];
 	}
 	else{
 		userId = 0;
@@ -230,54 +254,11 @@ function addColor()
 	
 }
 
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
-
-	let tmp = {Search:srch,UserID:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/SearchColors.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
-}
 function cancelAddButton()
 {
 	window.location.href = "contact.html";
 }
+
 // Add contact to datebase 
 function confirmAddButton()
 {
@@ -286,31 +267,34 @@ function confirmAddButton()
 	let email = document.getElementById("addEmail").value;
 	let phone = document.getElementById("addPhoneNumber").value;
 
-	//document.getElementById("contactAddResult").innerHTML = "";
-
-	let tmp = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone, UserID:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/AddContact.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "applciation/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
+	let check = CheckAddFields(); 
+	if (!check[0]) {
+		document.getElementById("contactAddResult").value = check[1];
+	} else {
+		let tmp = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone, UserID:userId};
+		let jsonPayload = JSON.stringify( tmp );
+	
+		let url = urlBase + '/AddContact.' + extension;
+	
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "applciation/json; charset=UTF-8");
+		try
 		{
-			if (this.readyState == 4 && this.status == 200)
+			xhr.onreadystatechange = function() 
 			{
-				document.getElementById("contactAddResult").innerHTML = "Contact added!";
-				window.location.href = "contact.html";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("contactAddResult").innerHTML = err.message;
+				if (this.readyState == 4 && this.status == 200)
+				{
+					document.getElementById("contactAddResult").innerHTML = "Contact added!";
+					window.location.href = "contact.html";
+				}
+			};
+			xhr.send(jsonPayload);
+		}
+		catch(err)
+		{
+			document.getElementById("contactAddResult").innerHTML = err.message;
+		}
 	}
 }
 
