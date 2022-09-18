@@ -89,7 +89,8 @@ body {
 }
 
 #loginResult,
-#contactAddResult {
+#contactAddResult,
+#contactEditResult {
   color: #ff0000;
 }
 
