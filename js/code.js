@@ -43,7 +43,10 @@ function CheckRegisterFields()
 
 function CheckAddFields()
 {
+	// From regexr.com/2rhq7
 	const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+	
+	// From regexr.com/38pvb
 	const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/g;
 	
 	let firstName = document.getElementById("addFirstName").value;
@@ -337,35 +340,41 @@ function confirmEditButton()
 	const EditwordsArray = EditUrl.split("?");
 	let EditIDUser = (EditwordsArray[5].split("="))[1];
 
-	let firstName = document.getElementById("editFirstName").value;
-	let lastName = document.getElementById("editLastName").value;
-	let email = document.getElementById("editEmail").value;
-	let phone = document.getElementById("editPhoneNumber").value;
-
-	let editJSON = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone,ID:EditIDUser};
-	let jsonPayload = JSON.stringify( editJSON );
-
-	let url = urlBase + '/UpdateContact.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "applciation/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
+	let check = CheckAddFields(); 
+	if (!check[0]) {
+		document.getElementById("contactAddResult").innerHTML = check[1];
+	} else {
+		let firstName = document.getElementById("editFirstName").value;
+		let lastName = document.getElementById("editLastName").value;
+		let email = document.getElementById("editEmail").value;
+		let phone = document.getElementById("editPhoneNumber").value;
+	
+		let editJSON = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone,ID:EditIDUser};
+		let jsonPayload = JSON.stringify( editJSON );
+	
+		let url = urlBase + '/UpdateContact.' + extension;
+	
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "applciation/json; charset=UTF-8");
+		try
 		{
-			if (this.readyState == 4 && this.status == 200)
+			xhr.onreadystatechange = function() 
 			{
-				console.log("updated contact");
-				window.location.href = "contact.html";
-			}
-		};
-		xhr.send(jsonPayload);
+				if (this.readyState == 4 && this.status == 200)
+				{
+					console.log("updated contact");
+					window.location.href = "contact.html";
+				}
+			};
+			xhr.send(jsonPayload);
+		}
+		catch(err)
+		{
+			console.log("error detected: " + err);
+		}
 	}
-	catch(err)
-	{
-		console.log("error detected: " + err);
-	}
+
 }
 
 function searchContact(page)
