@@ -75,6 +75,10 @@ function doRegister()
 					let jsonObject = JSON.parse( xhr.responseText );
 					window.location.href = "index.html";
 				}
+				else if (this.status == 403)
+				{
+					document.getElementById("loginResult").innerHTML = "Username is already in use. Please enter another username.";
+				}
 			};
 			xhr.send(jsonPayload);
 		}
