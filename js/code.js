@@ -49,10 +49,10 @@ function CheckAddFields()
 	// From regexr.com/38pvb
 	const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/g;
 	
-	let firstName = document.getElementById("addFirstName").value;
-	let lastName = document.getElementById("addLastName").value;
-	let email = document.getElementById("addEmail").value;
-	let phone = document.getElementById("addPhoneNumber").value;
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
+	let email = document.getElementById("email").value;
+	let phone = document.getElementById("phoneNumber").value;
 
 	if (firstName == "") {
 		return [false, "Please enter First Name"];
@@ -265,10 +265,10 @@ function cancelAddButton()
 // Add contact to datebase 
 function confirmAddButton()
 {
-	let firstName = document.getElementById("addFirstName").value;
-	let lastName = document.getElementById("addLastName").value;
-	let email = document.getElementById("addEmail").value;
-	let phone = document.getElementById("addPhoneNumber").value;
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
+	let email = document.getElementById("email").value;
+	let phone = document.getElementById("phoneNumber").value;
 
 	let check = CheckAddFields(); 
 	if (!check[0]) {
@@ -344,10 +344,10 @@ function confirmEditButton()
 	if (!check[0]) {
 		document.getElementById("contactEditResult").innerHTML = check[1];
 	} else {
-		let firstName = document.getElementById("editFirstName").value;
-		let lastName = document.getElementById("editLastName").value;
-		let email = document.getElementById("editEmail").value;
-		let phone = document.getElementById("editPhoneNumber").value;
+		let firstName = document.getElementById("firstName").value;
+		let lastName = document.getElementById("lastName").value;
+		let email = document.getElementById("email").value;
+		let phone = document.getElementById("phoneNumber").value;
 	
 		let editJSON = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone,ID:EditIDUser};
 		let jsonPayload = JSON.stringify( editJSON );
