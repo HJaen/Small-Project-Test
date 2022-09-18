@@ -269,7 +269,7 @@ function confirmAddButton()
 
 	let check = CheckAddFields(); 
 	if (!check[0]) {
-		document.getElementById("contactAddResult").value = check[1];
+		document.getElementById("contactAddResult").innerHTML = check[1];
 	} else {
 		let tmp = {FirstName:firstName,LastName:lastName,Email:email,Phone:phone, UserID:userId};
 		let jsonPayload = JSON.stringify( tmp );
