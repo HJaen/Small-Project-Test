@@ -110,7 +110,7 @@ body {
   cursor: pointer;
 }
 
-.confirm-button:focus {
+.confirm-button:active {
   background: rgba(76, 175, 80, 0.25);
 }
 
