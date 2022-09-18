@@ -342,7 +342,7 @@ function confirmEditButton()
 
 	let check = CheckAddFields(); 
 	if (!check[0]) {
-		document.getElementById("contactAddResult").innerHTML = check[1];
+		document.getElementById("contactEditResult").innerHTML = check[1];
 	} else {
 		let firstName = document.getElementById("editFirstName").value;
 		let lastName = document.getElementById("editLastName").value;
