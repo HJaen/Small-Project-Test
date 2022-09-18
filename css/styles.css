@@ -88,7 +88,8 @@ body {
   background: #275d29;
 }
 
-#loginResult {
+#loginResult,
+#contactAddResult {
   color: #ff0000;
 }
 
