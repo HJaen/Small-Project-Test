@@ -20,7 +20,6 @@
     }
     else
     {
-
         try {
             $stmt = $conn->prepare("INSERT into Users(FirstName, LastName, Login, Password) VALUES(?,?,?,?)");
             $stmt->bind_param("ssss", $firstName, $lastName, $login, $password);

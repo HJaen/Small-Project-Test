@@ -22,11 +22,18 @@
     {
         $stmt = $conn->prepare("INSERT into Contacts(FirstName, LastName, Email, Phone, UserID) VALUES(?,?,?,?,?)");
         $stmt->bind_param("sssss", $firstName, $lastName, $email, $phone, $userId);
-        $stmt->execute();
-        $stmt->close();
-        $conn->close();
-        http_response_code(200);
-        returnWithSuccess("Added new contact.");
+        if ( $stmt->execute() )
+        {
+            $stmt->close();
+            $conn->close();
+            http_response_code(200);
+            returnWithSuccess("Added new contact.");
+        }
+        else
+        {
+            http_response_code(400);
+            returnWithError("Could not create contact.");
+        }
     }
 
     function getRequestInfo()
