@@ -49,11 +49,6 @@ function CheckContactFields(contactFirstName, contactLastName, contactEmail, con
 	// From regexr.com/38pvb
 	const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/g;
 	
-	let contactFirstName = document.getElementById("contactFirstName").value;
-	let contactLastName = document.getElementById("contactLastName").value;
-	let contactEmail = document.getElementById("contactEmail").value;
-	let contactPhone = document.getElementById("contactPhoneNumber").value;
-
 	if (contactFirstName == "") {
 		return [false, "Please enter First Name"];
 	} else if (contactLastName == "") {
